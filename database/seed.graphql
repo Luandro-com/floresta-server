@@ -1,0 +1,174 @@
+mutation {
+  # createContent: createContent(data: {
+  #   title: "Flor do Cerrado"
+  #   description: "It's niceeeee"
+  #   logo: "https://i.imgur.com/5tzycGz.png"
+  #   infoImage: "https://i.imgur.com/I9b1RLd.png"
+  #   bannerImages: { set: [
+  #     "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w",
+  #     "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w",
+  #     "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w",
+  #   ]}
+  # }) {
+  #   title
+  # },
+  # productA: createProduct(data: {
+  #   price: 10000
+  #   stockQuantity: 10
+  #   name: "Malaleuca e lavanda"
+  #   slug: "malaleuca-e-lavanda"
+  #   description: "Sabão super delicado e ceboso"
+  #   image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+  #   category: {
+  #     create: {
+  #       name: "Em barra"
+  #       slug: "em-barra"
+  #       image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+  #       subCategories: {
+  #         create: {
+  #           name: "Peles secas"
+  #           slug: "peles-secas"
+  #         }
+  #       }
+  #     }
+  #   }
+  # }) {
+  #   id
+  # }
+  # productB: createProduct(data: {
+  #   price: 10000
+  #   stockQuantity: 10
+  #   name: "Óleo de castanha do pará"
+  #   slug: "oleo-para"
+  #   description: "Sabão super delicado e ceboso"
+  #   image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+  #   category: {
+  #     create: {
+  #       name: "Líquido"
+  #       slug: "liquido"
+  #       image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+  #       subCategories: {
+  #         create: {
+  #           name: "Peles oleosas"
+  #           slug: "peles-oleosas"
+  #           # category: {
+  #           #   connect: {
+  #           #     name: "Líquido",
+  #           #   }
+  #           # }
+  #         }
+  #       }
+  #     }
+  #   }
+  # }) {
+  #   id
+  # }
+  # productC: createProduct(data: {
+  #   price: 10000
+  #   stockQuantity: 10
+  #   name: "Pó dental"
+  #   slug: "po-dental"
+  #   description: "Melhor que Colgate"
+  #   image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+  #   category: {
+  #     create: {
+  #       name: "Outros"
+  #       slug: "outros"
+  #       image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+  #       subCategories: {
+  #         connect: {
+  #           slug: "peles-oleosas"
+  #           # category: {
+  #           #   connect: {
+  #           #     name: "Dentes",
+  #           #   }
+  #           # }
+  #         }
+  #       }
+  #     }
+  #   }
+  # }) {
+  #   id
+  # }
+  # variantA: createProductVariant(
+  #   data: {
+  #     name: "Limão e capim santo"
+  #     product: {
+  #       connect: {
+  #         name: "Caixa Kombucha"
+  #       }
+  #     }
+  #   },
+  # ) {
+  #   name
+  # }
+  # variantB: createProductVariant(
+  #   data: {
+  #     name: "Abacaxi com hortelã"
+  #     product: {
+  #       connect: {
+  #         name: "Caixa Kombucha"
+  #       }
+  #     }
+  #   },
+  # ) {
+  #   name
+  # }
+  createAdmin: createUser(data: {
+    email: "admin@example.com"
+    password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
+    firstName: "SUPER"
+    lastName: "DEV"
+    posts: {
+      create: [{
+        title: "Hello World 👋"
+        body: "<p>I like turtles.</p>"
+        isPublished: true
+      }, {
+        title: "Join us at GraphQL Europe 🇪🇺 "
+        body: "<p>Get a 10%-discount with this promo code on graphql-europe.org: gql-boilerplates</p>"
+        isPublished: true
+      }, {
+        title: "Solving world hunger"
+        body: "<p>This is a draft...</p>"
+        isPublished: false
+      }]
+    },
+    role: ADMIN
+  }) {
+    id
+  },
+  createEditor: createUser(data: {
+    email: "editor@example.com"
+    password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
+    firstName: "SUPER"
+    lastName: "EDITOR"
+    posts: {
+      create: [{
+        title: "Welcome to the universe 👋"
+        body: "<p>I like turtles.</p>"
+        isPublished: true
+      }, {
+        title: "There will be flags 🇪🇺 "
+        body: "<p>Get a 10%-discount with this promo code on graphql-europe.org: gql-boilerplates</p>"
+        isPublished: true
+      }, {
+        title: "Plan to overthrow the king"
+        body: "<p>This is a draft...</p>"
+        isPublished: false
+      }]
+    },
+    role: EDITOR
+  }) {
+    id
+  },
+  createUser: createUser(data: {
+    email: "customer@example.com"
+    password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
+    firstName: "John"
+    lastName: "McKenley"
+    role: CUSTOMER
+  }) {
+    id
+  },
+}

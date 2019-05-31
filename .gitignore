@@ -1,0 +1,14 @@
+dist
+package-lock.json
+node_modules
+.idea
+.vscode
+*.log
+.env*
+.history
+.DS_Store
+.data
+now.production.json
+up.json
+.env.production
+backup.json

@@ -1,0 +1,27 @@
+type User {
+  id: ID!
+  email: String!
+  firstName: String
+  lastName: String
+  image: String
+  posts: [Post!]!
+  role: Role!
+  subscribed: Boolean!
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  CUSTOMER
+  DELIVERY
+}
+
+input UserInput {
+  firstName: String
+  lastName: String
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}

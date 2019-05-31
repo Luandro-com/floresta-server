@@ -1,0 +1,52 @@
+type Post {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  isPublished: Boolean! @default(value: false)
+  title: String!
+  body: String!
+  author: User!
+}
+
+type User {
+  id: ID! @id
+  email: String! @unique
+  password: String!
+  firstName: String
+  lastName: String
+  posts: [Post!]!
+  subscribed: Boolean @default(value: false)
+  role: Role! @default(value: CUSTOMER)
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  CUSTOMER
+  DELIVERY
+}
+
+type NewsletterSubscription {
+  id: ID! @id
+  email: String! @unique
+  createdAt: DateTime! @createdAt
+}
+
+type ResetPasswordRequest {
+  id: ID! @id
+  hash: String! @unique
+  reset: Boolean @default(value: false)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  email: String!
+}
+
+type File {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: String! @unique
+}

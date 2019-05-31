@@ -1,0 +1,36 @@
+# import Post, DateTime from "generated/prisma.graphql"
+# import * from "types/user.graphql"
+# import * from "types/admin.graphql"
+
+scalar Upload
+
+type Query {
+  feed: [Post!]!
+  drafts: [Post!]!
+  post(id: ID!): Post
+  user: User
+  users: [User]
+  admins: [User]
+  uploads: [File]
+}
+
+type Mutation {
+  signup(email: String!, password: String!, cart: String): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  subscribe(email: String!): Boolean
+  createDraft(title: String!, text: String!): Post!
+  publish(id: ID!): Post!
+  deletePost(id: ID!): Post!
+  updateUser(input: UserInput): User!
+  updateUserRole(userId: ID!, role: Role!): User!
+  uploadFile(file: Upload!): File
+  uploadFiles(file: Upload!): [File]
+  renameFile(file: Upload!): File!
+  deleteFile(file: Upload!): File!
+  sendPasswordResetEmail(email: String!): Boolean
+  resetPassword(password: String! hash: String!): Boolean
+}
+
+type Subscription {
+  feedSubscription: PostSubscriptionPayload!
+}
