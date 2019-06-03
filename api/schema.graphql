@@ -1,6 +1,7 @@
 # import Post, DateTime from "generated/prisma.graphql"
 # import * from "types/user.graphql"
 # import * from "types/admin.graphql"
+# import * from "types/portal.graphql"
 
 scalar Upload
 
@@ -12,6 +13,10 @@ type Query {
   users: [User]
   admins: [User]
   uploads: [File]
+  content: Content
+  project(id: String, slug: String): Project
+  projects(category: String, tags: [String]): [Project]
+  # projectCategories
 }
 
 type Mutation {
@@ -29,6 +34,12 @@ type Mutation {
   deleteFile(file: Upload!): File!
   sendPasswordResetEmail(email: String!): Boolean
   resetPassword(password: String! hash: String!): Boolean
+  updateContent(input: ContentInput!): Content
+  saveProject(input: ProjectInput): Project
+  removeProject(productId: ID!): ID!
+  saveProjectCategory(input: ProjectCategoryInput): ProjectCategory
+  removeProjectCategory(categoryId: ID!): ID!
+
 }
 
 type Subscription {

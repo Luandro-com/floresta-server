@@ -1,17 +1,13 @@
 mutation {
-  # createContent: createContent(data: {
-  #   title: "Flor do Cerrado"
-  #   description: "It's niceeeee"
-  #   logo: "https://i.imgur.com/5tzycGz.png"
-  #   infoImage: "https://i.imgur.com/I9b1RLd.png"
-  #   bannerImages: { set: [
-  #     "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w",
-  #     "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w",
-  #     "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w",
-  #   ]}
-  # }) {
-  #   title
-  # },
+  createContent: createContent(data: {
+    title: "Associação Floresta Protegida"
+    description: "A Associação Floresta Protegida (AFP) é uma organização indígena sem fins lucrativos que representa atualmente 17 comunidades (cerca de 3000 indígenas) do Povo Mẽbêngôkre / Kayapó localizadas no sul do estado do Pará. Treze aldeias estão localizadas na Terra Indígena Kayapó (Apêjti, Àukre, Kẽndjêrêkrã, Kôkrajmôrô, Krẽmajti, Kubẽnkrãkêj, Môjkàràkô, Ngômejti, Pykarãrãkre, Pykatô, Pykatum, Rikaro e Tepdjati), duas estão localizadas na Terra Indígena Mẽkrãgnoti (Kawatire e Kẽndjam) e duas na Terra Indígena Las Casas (Tekrejarôtire e Kaprãnkrere)."
+    logo: "http://florestaprotegida.org.br/wp-content/uploads/2015/12/Logo_AFP_2015_Web-white.svg"
+    banner: "http://florestaprotegida.org.br/wp-content/uploads/2016/03/IMG_0973-2_invert.jpg"
+    subTitle: "Apoiar a autonomia política e econômica do Povo Mẽbêngôkre"
+  }) {
+    title
+  },
   # productA: createProduct(data: {
   #   price: 10000
   #   stockQuantity: 10

@@ -1,0 +1,11 @@
+input ContentInput {
+    id: String
+    banner: String
+    title: String
+    subTitle: String
+    description: String
+    logo: String
+    villageText: String
+    projectsText: String
+    mapLink: String
+}

@@ -1,37 +1,37 @@
-input ProductInput {
-  productId: String
+input ProjectInput {
+  id: String
   name: String
   slug: String
-  price: Int
-  stockQuantity: Int
+  description: String
+  media: String
+  photos: [String]
+  categoryId: String
+  tags: [String]
+}
+
+input ProjectCategoryInput {
+  id: String
+  name: String
+  slug: String
+  description: String
+  media: String
+  photos: [String]
+}
+
+input ProjectTagInput {
+  id: String
+  name: String
+  slug: String
   description: String
   image: String
-  category: String
-  subCategories: [String]
+  photos: [String]
 }
 
-input ProductVariantInput {
-  productId: String
-  variantId: String
-  name: String
-  information: String
-  image: String
-}
-
-input ProductCategoryInput {
-  productId: String
-  categoryId: String
+input VillageInput {
+  id: String
   name: String
   slug: String
-  information: String
+  description: String
   image: String
-}
-
-input ProductSubCategoryInput {
-  categoryId: String
-  subCategoryId: String
-  name: String
-  slug: String
-  information: String
-  image: String
+  photos: [String]
 }

@@ -10,20 +10,91 @@ type Post {
 
 type User {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   email: String! @unique
   password: String!
   firstName: String
   lastName: String
   posts: [Post!]!
   subscribed: Boolean @default(value: false)
-  role: Role! @default(value: CUSTOMER)
+  role: Role! @default(value: READER)
 }
 
 enum Role {
   ADMIN
   EDITOR
-  CUSTOMER
-  DELIVERY
+  READER
+}
+
+type Content {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  banner: String
+  title: String
+  subTitle: String
+  logo: String
+  description: String
+  villageText: String
+  projectsText: String
+  villages: [Village]
+  mapLink: String
+}
+
+type Village {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String
+  slug: String
+  photos: [String] @scalarList(strategy: RELATION)
+  media: String
+  description: String
+  content: [Content]
+}
+
+type Project {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  category: ProjectCategory!
+  tags: [ProjectTag]
+  name: String
+  slug: String
+  photos: [String] @scalarList(strategy: RELATION)
+  media: String
+  description: String
+}
+
+type ProjectCategory {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String
+  slug: String
+  photos: [String] @scalarList(strategy: RELATION)
+  media: String
+  description: String
+  projects: [Project]
+}
+
+type ProjectTag {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String
+  slug: String
+  photos: [String] @scalarList(strategy: RELATION)
+  media: String
+  description: String
+  projects: [Project]
+}
+
+type News {
+  id: ID! @id
+  description: String
+  link: String
 }
 
 type NewsletterSubscription {
