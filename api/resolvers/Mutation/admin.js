@@ -24,6 +24,39 @@ const admin = {
 			info
 		);
 	},
+	async saveProjectCategory(parent, { input }, ctx, info) {
+		console.log('INPUTTTTT', input);
+		if (input.name && !input.slug) {
+			input.slug = slugify(input.name);
+		}
+		const cleanInput = {};
+		if (input.id) {
+			Object.keys(input).map((i) => {
+				if (i !== 'id') Object.assign(cleanInput, { [i]: input[i] });
+			});
+		}
+		return await ctx.db.mutation.upsertProjectCategory(
+			{
+				update: cleanInput,
+				where: { id: input.id || '' },
+				create: input
+			},
+			info
+		);
+	},
+	async saveProjectTag(parent, { input }, ctx, info) {
+		if (input.name && !input.slug) {
+			input.slug = slugify(input.name);
+		}
+		return await ctx.db.mutation.upsertProjectTag(
+			{
+				update: input,
+				where: { id: input.projectId || '' },
+				create: input
+			},
+			info
+		);
+	},
 	async removeProject(parent, { projectId }, ctx, info) {
 		const { id } = await ctx.db.mutation.deleteProject({
 			where: { id: projectId },
@@ -37,8 +70,13 @@ const admin = {
 		console.log('ID', id);
 		return id;
 	},
+	async removeProjectTag(parent, { tagId }, ctx, info) {
+		const { id } = await ctx.db.mutation.deleteProjectTag({ where: { id: categoryId } });
+		console.log('ID', id);
+		return id;
+	},
 	async updateContent(parent, { input }, ctx, info) {
-		const where = input.id ? { id: input.id } : { createdAt_not: '1900-01-01T00:00:00.263Z' }
+		const where = input.id ? { id: input.id } : { createdAt_not: '1900-01-01T00:00:00.263Z' };
 		const goodValues = {};
 		Object.keys(input).map((key) => {
 			if (key !== 'id') {

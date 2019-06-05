@@ -16,7 +16,8 @@ type Query {
   content: Content
   project(id: String, slug: String): Project
   projects(category: String, tags: [String]): [Project]
-  # projectCategories
+  projectCategories(id: String, slug: String): [ProjectCategory]
+  projectTags: [ProjectTag]
 }
 
 type Mutation {
@@ -38,7 +39,9 @@ type Mutation {
   saveProject(input: ProjectInput): Project
   removeProject(productId: ID!): ID!
   saveProjectCategory(input: ProjectCategoryInput): ProjectCategory
+  saveProjectTag(input: ProjectTagInput): ProjectTag
   removeProjectCategory(categoryId: ID!): ID!
+  removeProjectTag(tagId: ID!): ID!
 
 }
 
