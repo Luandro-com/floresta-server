@@ -57,23 +57,23 @@ const admin = {
 			info
 		);
 	},
-	async removeProject(parent, { projectId }, ctx, info) {
-		const { id } = await ctx.db.mutation.deleteProject({
-			where: { id: projectId },
+	async removeProject(parent, { id }, ctx, info) {
+		const res = await ctx.db.mutation.deleteProject({
+			where: { id },
 			data: { variants: { disconnect: true } }
 		});
-		console.log('ID', id);
-		return id;
+		console.log('ID', res.id);
+		return res.id;
 	},
-	async removeProjectCategory(parent, { categoryId }, ctx, info) {
-		const { id } = await ctx.db.mutation.deleteProjectCategory({ where: { id: categoryId } });
-		console.log('ID', id);
-		return id;
+	async removeProjectCategory(parent, { id }, ctx, info) {
+		const res = await ctx.db.mutation.deleteProjectCategory({ where: { id } });
+		console.log('ID', res.id);
+		return res.id;
 	},
-	async removeProjectTag(parent, { tagId }, ctx, info) {
-		const { id } = await ctx.db.mutation.deleteProjectTag({ where: { id: categoryId } });
-		console.log('ID', id);
-		return id;
+	async removeProjectTag(parent, { id }, ctx, info) {
+		const res = await ctx.db.mutation.deleteProjectTag({ where: { id } });
+		console.log('ID', res.id);
+		return res.id;
 	},
 	async updateContent(parent, { input }, ctx, info) {
 		const where = input.id ? { id: input.id } : { createdAt_not: '1900-01-01T00:00:00.263Z' };

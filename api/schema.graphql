@@ -37,11 +37,11 @@ type Mutation {
   resetPassword(password: String! hash: String!): Boolean
   updateContent(input: ContentInput!): Content
   saveProject(input: ProjectInput): Project
-  removeProject(productId: ID!): ID!
+  removeProject(productId: ID!): String
   saveProjectCategory(input: ProjectCategoryInput): ProjectCategory
   saveProjectTag(input: ProjectTagInput): ProjectTag
-  removeProjectCategory(categoryId: ID!): ID!
-  removeProjectTag(tagId: ID!): ID!
+  removeProjectCategory(id: ID!): String
+  removeProjectTag(id: ID!): String
 
 }
 
