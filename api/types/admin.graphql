@@ -23,7 +23,7 @@ input ProjectTagInput {
   name: String
   slug: String
   description: String
-  image: String
+  media: String
   photos: [String]
 }
 
@@ -32,6 +32,6 @@ input VillageInput {
   name: String
   slug: String
   description: String
-  image: String
+  media: String
   photos: [String]
 }

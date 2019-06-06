@@ -17,7 +17,7 @@ type Query {
   project(id: String, slug: String): Project
   projects(category: String, tags: [String]): [Project]
   projectCategories(id: String, slug: String): [ProjectCategory]
-  projectTags: [ProjectTag]
+  projectTags(id: String, slug: String): [ProjectTag]
 }
 
 type Mutation {

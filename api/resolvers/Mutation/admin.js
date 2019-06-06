@@ -48,10 +48,16 @@ const admin = {
 		if (input.name && !input.slug) {
 			input.slug = slugify(input.name);
 		}
+		const cleanInput = {};
+		if (input.id) {
+			Object.keys(input).map((i) => {
+				if (i !== 'id') Object.assign(cleanInput, { [i]: input[i] });
+			});
+		}
 		return await ctx.db.mutation.upsertProjectTag(
 			{
-				update: input,
-				where: { id: input.projectId || '' },
+				update: cleanInput,
+				where: { id: input.id || '' },
 				create: input
 			},
 			info
