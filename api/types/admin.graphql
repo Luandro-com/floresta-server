@@ -5,7 +5,7 @@ input ProjectInput {
   description: String
   media: String
   photos: [String]
-  categoryId: String
+  category: String
   tags: [String]
 }
 

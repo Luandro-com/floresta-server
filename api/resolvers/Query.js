@@ -75,12 +75,6 @@ const Query = {
 	},
 
 	projects(parent, args, ctx, info) {
-		const { id, slug, category, subCategory } = args;
-		if (category) {
-			return ctx.db.query.projects({ where: { category: { slug: category } } }, info);
-		} else if (subCategory) {
-			return ctx.db.query.projects({ where: { subCategories: { slug: subCategory } } }, info);
-		}
 		return ctx.db.query.projects(null, info);
 	},
 	projectCategories(parent, args, ctx, info) {

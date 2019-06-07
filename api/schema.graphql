@@ -14,21 +14,21 @@ type Query {
   admins: [User]
   uploads: [File]
   content: Content
-  project(id: String, slug: String): Project
-  projects(category: String, tags: [String]): [Project]
-  projectCategories(id: String, slug: String): [ProjectCategory]
-  projectTags(id: String, slug: String): [ProjectTag]
+  project(id: String slug: String): Project
+  projects: [Project]
+  projectCategories(id: String slug: String): [ProjectCategory]
+  projectTags(id: String slug: String): [ProjectTag]
 }
 
 type Mutation {
-  signup(email: String!, password: String!, cart: String): AuthPayload!
-  login(email: String!, password: String!): AuthPayload!
+  signup(email: String! password: String! cart: String): AuthPayload!
+  login(email: String! password: String!): AuthPayload!
   subscribe(email: String!): Boolean
-  createDraft(title: String!, text: String!): Post!
+  createDraft(title: String! text: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
   updateUser(input: UserInput): User!
-  updateUserRole(userId: ID!, role: Role!): User!
+  updateUserRole(userId: ID! role: Role!): User!
   uploadFile(file: Upload!): File
   uploadFiles(file: Upload!): [File]
   renameFile(file: Upload!): File!
@@ -37,9 +37,9 @@ type Mutation {
   resetPassword(password: String! hash: String!): Boolean
   updateContent(input: ContentInput!): Content
   saveProject(input: ProjectInput): Project
-  removeProject(productId: ID!): String
   saveProjectCategory(input: ProjectCategoryInput): ProjectCategory
   saveProjectTag(input: ProjectTagInput): ProjectTag
+  removeProject(id: ID!): String
   removeProjectCategory(id: ID!): String
   removeProjectTag(id: ID!): String
 

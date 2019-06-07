@@ -12,20 +12,72 @@ const admin = {
 		);
 	},
 	async saveProject(parent, { input }, ctx, info) {
+		console.log('INPUTTTTT', input);
 		if (input.name && !input.slug) {
 			input.slug = slugify(input.name);
 		}
+		let cleanInput = {};
+		if (input.id) {
+			Object.keys(input).map((i) => {
+				if (i !== 'id') Object.assign(cleanInput, { [i]: input[i] });
+			});
+		}
+		let connections = {};
+		let categoryCreateConnections = {};
+		let categoryUpdateConnections = {};
+		if (input.category) {
+			Object.assign(categoryCreateConnections, {
+				category: {
+					connect: {
+						id: input.category
+					}
+				}
+			});
+			Object.assign(categoryUpdateConnections, {
+				category: {
+					connect: {
+						id: input.category
+					}
+				}
+			});
+		}
+		if (input.photos) {
+			Object.assign(connections, {
+				photos: {
+					set: input.photos ? input.photos : null
+				}
+			});
+		}
+		let tagsCreateConnections = {};
+		let tagsUpdateConnections = {};
+
+		if (input.tags) {
+			Object.assign(tagsUpdateConnections, {
+				tags: {
+					set: input.tags.map((t) => {
+						return { id: t };
+					})
+				}
+			});
+			Object.assign(tagsCreateConnections, {
+				tags: {
+					connect: input.tags.map((t) => {
+						return { id: t };
+					})
+				}
+			});
+		}
+		const where = input.id ? { id: input.id } : { slug: input.slug };
 		return await ctx.db.mutation.upsertProject(
 			{
-				update: input,
-				where: { id: input.projectId || '' },
-				create: input
+				update: { ...cleanInput, ...connections, ...tagsUpdateConnections, ...categoryUpdateConnections },
+				where,
+				create: { ...input, ...connections, ...tagsCreateConnections, ...categoryCreateConnections }
 			},
 			info
 		);
 	},
 	async saveProjectCategory(parent, { input }, ctx, info) {
-		console.log('INPUTTTTT', input);
 		if (input.name && !input.slug) {
 			input.slug = slugify(input.name);
 		}

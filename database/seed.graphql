@@ -163,7 +163,7 @@ mutation {
     password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
     firstName: "John"
     lastName: "McKenley"
-    role: CUSTOMER
+    role: READER
   }) {
     id
   },
