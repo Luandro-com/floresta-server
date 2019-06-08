@@ -94,6 +94,17 @@ const Query = {
 			return ctx.db.query.projectTags({ where: { slug } }, info);
 		}
 		return ctx.db.query.projectTags(null, info);
+	},
+	village(parent, args, ctx, info) {
+		const { id, slug } = args;
+		if (id) {
+			return ctx.db.query.village({ where: { id } }, info);
+		} else if (slug) {
+			return ctx.db.query.village({ where: { slug } }, info);
+		}
+	},
+	villages(parent, args, ctx, info) {
+		return ctx.db.query.villages(null, info);
 	}
 };
 

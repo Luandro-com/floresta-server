@@ -48,7 +48,7 @@ type Village {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   name: String
-  slug: String
+  slug: String @unique
   photos: [String] @scalarList(strategy: RELATION)
   media: String
   description: String

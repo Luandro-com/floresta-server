@@ -115,6 +115,25 @@ const admin = {
 			info
 		);
 	},
+	async saveVillage(parent, { input }, ctx, info) {
+		if (input.name && !input.slug) {
+			input.slug = slugify(input.name);
+		}
+		const cleanInput = {};
+		if (input.id) {
+			Object.keys(input).map((i) => {
+				if (i !== 'id') Object.assign(cleanInput, { [i]: input[i] });
+			});
+		}
+		return await ctx.db.mutation.upsertVillage(
+			{
+				update: cleanInput,
+				where: { id: input.id || '' },
+				create: input
+			},
+			info
+		);
+	},
 	async removeProject(parent, { id }, ctx, info) {
 		const res = await ctx.db.mutation.deleteProject({
 			where: { id },
@@ -130,6 +149,11 @@ const admin = {
 	},
 	async removeProjectTag(parent, { id }, ctx, info) {
 		const res = await ctx.db.mutation.deleteProjectTag({ where: { id } });
+		console.log('ID', res.id);
+		return res.id;
+	},
+	async removeVillage(parent, { id }, ctx, info) {
+		const res = await ctx.db.mutation.deleteVillage({ where: { id } });
 		console.log('ID', res.id);
 		return res.id;
 	},

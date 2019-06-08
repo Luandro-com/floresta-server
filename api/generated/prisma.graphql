@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Thu Jun 06 2019 14:06:02 GMT-0300 (-03)
+# timestamp: Sat Jun 08 2019 11:32:53 GMT-0300 (-03)
 
 type AggregateContent {
   count: Int!
@@ -6038,4 +6038,5 @@ input VillageWhereInput {
 
 input VillageWhereUniqueInput {
   id: ID
+  slug: String
 }
