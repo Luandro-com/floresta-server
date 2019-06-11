@@ -2,6 +2,20 @@
   "name": "florestaprotegida-server",
   "version": 2,
   "builds": [
-    { "src": "api/index.js", "use": "@now/node-server" }
-  ]
+    { "src": "api/**/*.js", "use": "@now/node" }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PRODUCTION": "true",
+    "PRISMA_STAGE": "production",
+    "PRISMA_ENDPOINT": "https://us1.prisma.sh/luandro-93a3b2/florestaprotegida/dev",
+    "PRISMA_SECRET": "mysecret123",
+    "PRISMA_MANAGEMENT_API_SECRET": "mysupersecret123",
+    "APP_SECRET": "jwtsecret123",
+    "S3_BUCKET_NAME": "florestaprotegida",
+    "S3_AWS_SECRET_ACCESS_KEY": "FAKE",
+    "S3_AWS_ACCESS_KEY_ID": "FAKE",
+    "S3_ENDPOINT": "http://localhost:4567/",
+    "MAILGUN_API_KEY": ""
+  }
 }

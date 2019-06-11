@@ -1,0 +1,56 @@
+version: '3'
+services:
+  florest-api:
+    build: ./api
+    restart: always
+    ports:
+      - "4000:4000"
+    command: "npm run deploy-start"
+    environment:
+      # - JWT_SECRET=super-secret-thing
+      # - PRISMA_SECRET=super-duber-secret-thing
+      # - PRISMA_URL=https://https://us1.prisma.sh/luandro-93a3b2/florestaprotegida/dev
+      # - NODE_ENV=production
+      - VIRTUAL_HOST=floresta-api.luandro.com
+      - VIRTUAL_PORT=4000
+      - LETSENCRYPT_HOST=floresta-api.luandro.com
+      - LETSENCRYPT_EMAIL=luandro@gmail.com
+    networks:
+      - internal
+  florest-admin:
+    build: ./admin
+    restart: always
+    volumes:
+      - ./admin:/usr/app
+      - /usr/app/node_modules
+      - /usr/app/.next
+    ports:
+      - "3005:3005"
+    command: "npm start"
+    environment:
+      - API_HOST=https://floresta-api.luandro.com
+      - NODE_ENV=production
+      - VIRTUAL_HOST=florestaprotegida.luandro.com
+      - VIRTUAL_PORT=3005
+      - LETSENCRYPT_HOST=florestaprotegida.luandro.com
+      - LETSENCRYPT_EMAIL=luandro@gmail.com
+  # florest-app:
+  #   build: ./app
+  #   restart: always
+  #   volumes:
+  #     - ./store:/usr/app
+  #     - /usr/app/node_modules
+  #     - /usr/app/.next
+  #   ports:
+  #     - "3001:3001"
+  #   command: "npm start"
+  #   environment:
+  #     - API_HOST=https://api.luandro.com
+  #     - NODE_ENV=production
+  #     - VIRTUAL_HOST=luandro.com
+  #     - VIRTUAL_PORT=3001
+  #     - LETSENCRYPT_HOST=luandro.com
+  #     - LETSENCRYPT_EMAIL=luandro@gmail.com
+networks:
+  internal:
+    external: true

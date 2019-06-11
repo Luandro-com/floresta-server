@@ -12,6 +12,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `http://localhost:4466/florestaprotegida-server/dev`
+  endpoint: `https://us1.prisma.sh/luandro-93a3b2/florestaprotegida/dev`
 });
 exports.prisma = new exports.Prisma();
