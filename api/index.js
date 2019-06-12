@@ -33,6 +33,7 @@ const server = new GraphQLServer({
 
 server.use(cors());
 
-// server.start(() => console.log('Server is running on http://localhost:4000'));
+server.start(() => console.log('Server is running on http://localhost:4000'));
 
-module.exports = server;
+/* Deploying with Now v2 */
+// module.exports = server;

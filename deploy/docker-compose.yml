@@ -16,7 +16,7 @@ services:
       - LETSENCRYPT_HOST=floresta-api.luandro.com
       - LETSENCRYPT_EMAIL=luandro@gmail.com
     networks:
-      - internal
+      - nginx-proxy
   florest-admin:
     build: ./admin
     restart: always
@@ -52,5 +52,5 @@ services:
   #     - LETSENCRYPT_HOST=luandro.com
   #     - LETSENCRYPT_EMAIL=luandro@gmail.com
 networks:
-  internal:
+  nginx-proxy:
     external: true
