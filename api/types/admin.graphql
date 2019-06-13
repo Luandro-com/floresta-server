@@ -35,3 +35,9 @@ input VillageInput {
   media: String
   photos: [String]
 }
+
+input NewsInput {
+  id: String
+  description: String
+  link: String
+}

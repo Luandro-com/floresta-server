@@ -134,6 +134,22 @@ const admin = {
 			info
 		);
 	},
+	async saveNews(parent, { input }, ctx, info) {
+		const cleanInput = {};
+		if (input.id) {
+			Object.keys(input).map((i) => {
+				if (i !== 'id') Object.assign(cleanInput, { [i]: input[i] });
+			});
+		}
+		return await ctx.db.mutation.upsertNews(
+			{
+				update: cleanInput,
+				where: { id: input.id || '' },
+				create: input
+			},
+			info
+		);
+	},
 	async removeProject(parent, { id }, ctx, info) {
 		const res = await ctx.db.mutation.deleteProject({
 			where: { id },
@@ -154,6 +170,11 @@ const admin = {
 	},
 	async removeVillage(parent, { id }, ctx, info) {
 		const res = await ctx.db.mutation.deleteVillage({ where: { id } });
+		console.log('ID', res.id);
+		return res.id;
+	},
+	async removeNews(parent, { id }, ctx, info) {
+		const res = await ctx.db.mutation.deleteNews({ where: { id } });
 		console.log('ID', res.id);
 		return res.id;
 	},

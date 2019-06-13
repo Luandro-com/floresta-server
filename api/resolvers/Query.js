@@ -105,6 +105,15 @@ const Query = {
 	},
 	villages(parent, args, ctx, info) {
 		return ctx.db.query.villages(null, info);
+	},
+	news(parent, args, ctx, info) {
+		const { id } = args;
+		if (id) {
+			return ctx.db.query.news({ where: { id } }, info);
+		}
+	},
+	newsAll(parent, args, ctx, info) {
+		return ctx.db.query.newses(null, info);
 	}
 };
 

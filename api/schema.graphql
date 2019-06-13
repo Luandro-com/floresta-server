@@ -20,6 +20,8 @@ type Query {
   projectTags(id: String slug: String): [ProjectTag]
   village(id: String slug: String): Village
   villages: [Village]
+  news(id: String): News
+  newsAll: [News]
 
 }
 
@@ -43,10 +45,12 @@ type Mutation {
   saveProjectCategory(input: ProjectCategoryInput): ProjectCategory
   saveProjectTag(input: ProjectTagInput): ProjectTag
   saveVillage(input: VillageInput): Village
+  saveNews(input: NewsInput): News
   removeProject(id: ID!): String
   removeProjectCategory(id: ID!): String
   removeProjectTag(id: ID!): String
   removeVillage(id: ID!): String
+  removeNews(id: ID!): String
 
 }
 

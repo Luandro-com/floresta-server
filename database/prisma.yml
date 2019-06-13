@@ -1,5 +1,5 @@
-# endpoint: ${env:PRISMA_ENDPOINT}
-endpoint: http://localhost:4466
+endpoint: ${env:PRISMA_ENDPOINT}
+# endpoint: http://localhost:4466
 
 # `Authorization` header of HTTP requests against the Prisma endpoint.
 # secret: ${env:PRISMA_SECRET}

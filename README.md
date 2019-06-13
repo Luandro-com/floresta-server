@@ -28,9 +28,13 @@ The Prisma server is also exposed on `http://localhost:4466`
 
 To install create a folder for the project on your server and run `curl -o- -L http://tiny.cc/6r837y | bash` inside it. Edit `mv .env.example .env` with your variables.
 
-If you don't have [spaces]() or [s3]() you can run a minio server like this:
+If you don't have [spaces](https://www.digitalocean.com/docs/spaces/) or [s3](https://aws.amazon.com/s3/) you can run a self hosted [minio](https://min.io/) server like this:
 ```
-docker run -dp 9000:9000 --restart unless-stopped --name minio \
+docker run -d --restart unless-stopped --name minio \
+  -e VIRTUAL_HOST=s3.luandro.com \
+  -e VIRTUAL_PORT=9000 \
+  -e LETSENCRYPT_HOST=s3.luandro.com \
+  -e LETSENCRYPT_EMAIL=luandro@gmail.com \
   -e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE" \
   -e "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
   -v /mnt/data:/mnt/volume_nyc3_01/docker_volumes/minio-data \
