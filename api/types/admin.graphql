@@ -15,6 +15,7 @@ input ProjectCategoryInput {
   slug: String
   description: String
   media: String
+  icon: String
   photos: [String]
 }
 
@@ -40,4 +41,6 @@ input NewsInput {
   id: String
   description: String
   link: String
+  title: String
+  media: String
 }

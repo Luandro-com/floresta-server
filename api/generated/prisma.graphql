@@ -1,5 +1,5 @@
-# source: https://us1.prisma.sh/luandro-93a3b2/florestaprotegida/dev
-# timestamp: Wed Jun 12 2019 15:40:21 GMT-0300 (-03)
+# source: http://localhost:4466
+# timestamp: Tue Jul 30 2019 19:10:59 GMT-0300 (-03)
 
 type AggregateContent {
   count: Int!
@@ -63,6 +63,8 @@ type Content implements Node {
   projectsText: String
   villages(where: VillageWhereInput, orderBy: VillageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Village!]
   mapLink: String
+  youtubeLink: String
+  facebookLink: String
 }
 
 """A connection to a list of items."""
@@ -85,6 +87,8 @@ input ContentCreateInput {
   villageText: String
   projectsText: String
   mapLink: String
+  youtubeLink: String
+  facebookLink: String
   villages: VillageCreateManyWithoutContentInput
 }
 
@@ -103,6 +107,8 @@ input ContentCreateWithoutVillagesInput {
   villageText: String
   projectsText: String
   mapLink: String
+  youtubeLink: String
+  facebookLink: String
 }
 
 """An edge in a connection."""
@@ -137,6 +143,10 @@ enum ContentOrderByInput {
   projectsText_DESC
   mapLink_ASC
   mapLink_DESC
+  youtubeLink_ASC
+  youtubeLink_DESC
+  facebookLink_ASC
+  facebookLink_DESC
 }
 
 type ContentPreviousValues {
@@ -151,6 +161,8 @@ type ContentPreviousValues {
   villageText: String
   projectsText: String
   mapLink: String
+  youtubeLink: String
+  facebookLink: String
 }
 
 input ContentScalarWhereInput {
@@ -566,6 +578,86 @@ input ContentScalarWhereInput {
 
   """All values not ending with the given string."""
   mapLink_not_ends_with: String
+  youtubeLink: String
+
+  """All values that are not equal to given value."""
+  youtubeLink_not: String
+
+  """All values that are contained in given list."""
+  youtubeLink_in: [String!]
+
+  """All values that are not contained in given list."""
+  youtubeLink_not_in: [String!]
+
+  """All values less than the given value."""
+  youtubeLink_lt: String
+
+  """All values less than or equal the given value."""
+  youtubeLink_lte: String
+
+  """All values greater than the given value."""
+  youtubeLink_gt: String
+
+  """All values greater than or equal the given value."""
+  youtubeLink_gte: String
+
+  """All values containing the given string."""
+  youtubeLink_contains: String
+
+  """All values not containing the given string."""
+  youtubeLink_not_contains: String
+
+  """All values starting with the given string."""
+  youtubeLink_starts_with: String
+
+  """All values not starting with the given string."""
+  youtubeLink_not_starts_with: String
+
+  """All values ending with the given string."""
+  youtubeLink_ends_with: String
+
+  """All values not ending with the given string."""
+  youtubeLink_not_ends_with: String
+  facebookLink: String
+
+  """All values that are not equal to given value."""
+  facebookLink_not: String
+
+  """All values that are contained in given list."""
+  facebookLink_in: [String!]
+
+  """All values that are not contained in given list."""
+  facebookLink_not_in: [String!]
+
+  """All values less than the given value."""
+  facebookLink_lt: String
+
+  """All values less than or equal the given value."""
+  facebookLink_lte: String
+
+  """All values greater than the given value."""
+  facebookLink_gt: String
+
+  """All values greater than or equal the given value."""
+  facebookLink_gte: String
+
+  """All values containing the given string."""
+  facebookLink_contains: String
+
+  """All values not containing the given string."""
+  facebookLink_not_contains: String
+
+  """All values starting with the given string."""
+  facebookLink_starts_with: String
+
+  """All values not starting with the given string."""
+  facebookLink_not_starts_with: String
+
+  """All values ending with the given string."""
+  facebookLink_ends_with: String
+
+  """All values not ending with the given string."""
+  facebookLink_not_ends_with: String
 }
 
 type ContentSubscriptionPayload {
@@ -614,6 +706,8 @@ input ContentUpdateInput {
   villageText: String
   projectsText: String
   mapLink: String
+  youtubeLink: String
+  facebookLink: String
   villages: VillageUpdateManyWithoutContentInput
 }
 
@@ -626,6 +720,8 @@ input ContentUpdateManyDataInput {
   villageText: String
   projectsText: String
   mapLink: String
+  youtubeLink: String
+  facebookLink: String
 }
 
 input ContentUpdateManyMutationInput {
@@ -637,6 +733,8 @@ input ContentUpdateManyMutationInput {
   villageText: String
   projectsText: String
   mapLink: String
+  youtubeLink: String
+  facebookLink: String
 }
 
 input ContentUpdateManyWithoutVillagesInput {
@@ -665,6 +763,8 @@ input ContentUpdateWithoutVillagesDataInput {
   villageText: String
   projectsText: String
   mapLink: String
+  youtubeLink: String
+  facebookLink: String
 }
 
 input ContentUpdateWithWhereUniqueWithoutVillagesInput {
@@ -1091,6 +1191,86 @@ input ContentWhereInput {
 
   """All values not ending with the given string."""
   mapLink_not_ends_with: String
+  youtubeLink: String
+
+  """All values that are not equal to given value."""
+  youtubeLink_not: String
+
+  """All values that are contained in given list."""
+  youtubeLink_in: [String!]
+
+  """All values that are not contained in given list."""
+  youtubeLink_not_in: [String!]
+
+  """All values less than the given value."""
+  youtubeLink_lt: String
+
+  """All values less than or equal the given value."""
+  youtubeLink_lte: String
+
+  """All values greater than the given value."""
+  youtubeLink_gt: String
+
+  """All values greater than or equal the given value."""
+  youtubeLink_gte: String
+
+  """All values containing the given string."""
+  youtubeLink_contains: String
+
+  """All values not containing the given string."""
+  youtubeLink_not_contains: String
+
+  """All values starting with the given string."""
+  youtubeLink_starts_with: String
+
+  """All values not starting with the given string."""
+  youtubeLink_not_starts_with: String
+
+  """All values ending with the given string."""
+  youtubeLink_ends_with: String
+
+  """All values not ending with the given string."""
+  youtubeLink_not_ends_with: String
+  facebookLink: String
+
+  """All values that are not equal to given value."""
+  facebookLink_not: String
+
+  """All values that are contained in given list."""
+  facebookLink_in: [String!]
+
+  """All values that are not contained in given list."""
+  facebookLink_not_in: [String!]
+
+  """All values less than the given value."""
+  facebookLink_lt: String
+
+  """All values less than or equal the given value."""
+  facebookLink_lte: String
+
+  """All values greater than the given value."""
+  facebookLink_gt: String
+
+  """All values greater than or equal the given value."""
+  facebookLink_gte: String
+
+  """All values containing the given string."""
+  facebookLink_contains: String
+
+  """All values not containing the given string."""
+  facebookLink_not_contains: String
+
+  """All values starting with the given string."""
+  facebookLink_starts_with: String
+
+  """All values not starting with the given string."""
+  facebookLink_not_starts_with: String
+
+  """All values ending with the given string."""
+  facebookLink_ends_with: String
+
+  """All values not ending with the given string."""
+  facebookLink_not_ends_with: String
   villages_every: VillageWhereInput
   villages_some: VillageWhereInput
   villages_none: VillageWhereInput
@@ -1477,6 +1657,9 @@ input FileWhereUniqueInput {
   url: String
 }
 
+"""Raw JSON value"""
+scalar Json
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -1550,6 +1733,7 @@ type Mutation {
   deleteManyNewsletterSubscriptions(where: NewsletterSubscriptionWhereInput): BatchPayload!
   deleteManyResetPasswordRequests(where: ResetPasswordRequestWhereInput): BatchPayload!
   deleteManyFiles(where: FileWhereInput): BatchPayload!
+  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -1562,6 +1746,8 @@ type News implements Node {
   id: ID!
   description: String
   link: String
+  title: String
+  media: String
 }
 
 """A connection to a list of items."""
@@ -1578,6 +1764,8 @@ input NewsCreateInput {
   id: ID
   description: String
   link: String
+  title: String
+  media: String
 }
 
 """An edge in a connection."""
@@ -1804,12 +1992,18 @@ enum NewsOrderByInput {
   description_DESC
   link_ASC
   link_DESC
+  title_ASC
+  title_DESC
+  media_ASC
+  media_DESC
 }
 
 type NewsPreviousValues {
   id: ID!
   description: String
   link: String
+  title: String
+  media: String
 }
 
 type NewsSubscriptionPayload {
@@ -1852,11 +2046,15 @@ input NewsSubscriptionWhereInput {
 input NewsUpdateInput {
   description: String
   link: String
+  title: String
+  media: String
 }
 
 input NewsUpdateManyMutationInput {
   description: String
   link: String
+  title: String
+  media: String
 }
 
 input NewsWhereInput {
@@ -1988,6 +2186,86 @@ input NewsWhereInput {
 
   """All values not ending with the given string."""
   link_not_ends_with: String
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  media: String
+
+  """All values that are not equal to given value."""
+  media_not: String
+
+  """All values that are contained in given list."""
+  media_in: [String!]
+
+  """All values that are not contained in given list."""
+  media_not_in: [String!]
+
+  """All values less than the given value."""
+  media_lt: String
+
+  """All values less than or equal the given value."""
+  media_lte: String
+
+  """All values greater than the given value."""
+  media_gt: String
+
+  """All values greater than or equal the given value."""
+  media_gte: String
+
+  """All values containing the given string."""
+  media_contains: String
+
+  """All values not containing the given string."""
+  media_not_contains: String
+
+  """All values starting with the given string."""
+  media_starts_with: String
+
+  """All values not starting with the given string."""
+  media_not_starts_with: String
+
+  """All values ending with the given string."""
+  media_ends_with: String
+
+  """All values not ending with the given string."""
+  media_not_ends_with: String
 }
 
 input NewsWhereUniqueInput {
@@ -2632,6 +2910,10 @@ input PostWhereUniqueInput {
   slug: String
 }
 
+enum PrismaDatabase {
+  default
+}
+
 type Project implements Node {
   id: ID!
   createdAt: DateTime!
@@ -2653,6 +2935,7 @@ type ProjectCategory implements Node {
   slug: String
   photos: [String!]!
   media: String
+  icon: String
   description: String
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
 }
@@ -2672,6 +2955,7 @@ input ProjectCategoryCreateInput {
   name: String
   slug: String
   media: String
+  icon: String
   description: String
   photos: ProjectCategoryCreatephotosInput
   projects: ProjectCreateManyWithoutCategoryInput
@@ -2691,6 +2975,7 @@ input ProjectCategoryCreateWithoutProjectsInput {
   name: String
   slug: String
   media: String
+  icon: String
   description: String
   photos: ProjectCategoryCreatephotosInput
 }
@@ -2717,6 +3002,8 @@ enum ProjectCategoryOrderByInput {
   slug_DESC
   media_ASC
   media_DESC
+  icon_ASC
+  icon_DESC
   description_ASC
   description_DESC
 }
@@ -2729,6 +3016,7 @@ type ProjectCategoryPreviousValues {
   slug: String
   photos: [String!]!
   media: String
+  icon: String
   description: String
 }
 
@@ -2773,6 +3061,7 @@ input ProjectCategoryUpdateInput {
   name: String
   slug: String
   media: String
+  icon: String
   description: String
   photos: ProjectCategoryUpdatephotosInput
   projects: ProjectUpdateManyWithoutCategoryInput
@@ -2782,6 +3071,7 @@ input ProjectCategoryUpdateManyMutationInput {
   name: String
   slug: String
   media: String
+  icon: String
   description: String
   photos: ProjectCategoryUpdatephotosInput
 }
@@ -2801,6 +3091,7 @@ input ProjectCategoryUpdateWithoutProjectsDataInput {
   name: String
   slug: String
   media: String
+  icon: String
   description: String
   photos: ProjectCategoryUpdatephotosInput
 }
@@ -3023,6 +3314,46 @@ input ProjectCategoryWhereInput {
 
   """All values not ending with the given string."""
   media_not_ends_with: String
+  icon: String
+
+  """All values that are not equal to given value."""
+  icon_not: String
+
+  """All values that are contained in given list."""
+  icon_in: [String!]
+
+  """All values that are not contained in given list."""
+  icon_not_in: [String!]
+
+  """All values less than the given value."""
+  icon_lt: String
+
+  """All values less than or equal the given value."""
+  icon_lte: String
+
+  """All values greater than the given value."""
+  icon_gt: String
+
+  """All values greater than or equal the given value."""
+  icon_gte: String
+
+  """All values containing the given string."""
+  icon_contains: String
+
+  """All values not containing the given string."""
+  icon_not_contains: String
+
+  """All values starting with the given string."""
+  icon_starts_with: String
+
+  """All values not starting with the given string."""
+  icon_not_starts_with: String
+
+  """All values ending with the given string."""
+  icon_ends_with: String
+
+  """All values not ending with the given string."""
+  icon_not_ends_with: String
   description: String
 
   """All values that are not equal to given value."""

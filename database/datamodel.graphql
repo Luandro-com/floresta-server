@@ -41,6 +41,8 @@ type Content {
   projectsText: String
   villages: [Village]
   mapLink: String
+  youtubeLink: String
+  facebookLink: String
 }
 
 type Village {
@@ -76,6 +78,7 @@ type ProjectCategory {
   slug: String @unique
   photos: [String] @scalarList(strategy: RELATION)
   media: String
+  icon: String
   description: String
   projects: [Project]
 }
@@ -96,6 +99,8 @@ type News {
   id: ID! @id
   description: String
   link: String
+  title: String
+  media: String
 }
 
 type NewsletterSubscription {

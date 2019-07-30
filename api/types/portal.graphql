@@ -3,6 +3,8 @@ input ContentInput {
     banner: String
     title: String
     subTitle: String
+    facebookLink: String
+    youtubeLink: String
     description: String
     logo: String
     villageText: String
