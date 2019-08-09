@@ -1,13 +1,15 @@
 input ContentInput {
     id: String
-    banner: String
+    headerImage: String
     title: String
     subTitle: String
     facebookLink: String
     youtubeLink: String
     description: String
     logo: String
-    villageText: String
-    projectsText: String
     mapLink: String
+    aboutHtml: String
+    villageHtml: String
+    projectsHtml: String
+    categoriesHtml: String
 }

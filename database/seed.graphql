@@ -1,115 +1,124 @@
 mutation {
   createContent: createContent(data: {
     title: "Associação Floresta Protegida"
-    description: "A Associação Floresta Protegida (AFP) é uma organização indígena sem fins lucrativos que representa atualmente 17 comunidades (cerca de 3000 indígenas) do Povo Mẽbêngôkre / Kayapó localizadas no sul do estado do Pará. Treze aldeias estão localizadas na Terra Indígena Kayapó (Apêjti, Àukre, Kẽndjêrêkrã, Kôkrajmôrô, Krẽmajti, Kubẽnkrãkêj, Môjkàràkô, Ngômejti, Pykarãrãkre, Pykatô, Pykatum, Rikaro e Tepdjati), duas estão localizadas na Terra Indígena Mẽkrãgnoti (Kawatire e Kẽndjam) e duas na Terra Indígena Las Casas (Tekrejarôtire e Kaprãnkrere)."
+    aboutHtml: "A Associação Floresta Protegida (AFP) é uma organização indígena sem fins lucrativos que representa atualmente 17 comunidades (cerca de 3000 indígenas) do Povo Mẽbêngôkre / Kayapó localizadas no sul do estado do Pará. Treze aldeias estão localizadas na Terra Indígena Kayapó (Apêjti, Àukre, Kẽndjêrêkrã, Kôkrajmôrô, Krẽmajti, Kubẽnkrãkêj, Môjkàràkô, Ngômejti, Pykarãrãkre, Pykatô, Pykatum, Rikaro e Tepdjati), duas estão localizadas na Terra Indígena Mẽkrãgnoti (Kawatire e Kẽndjam) e duas na Terra Indígena Las Casas (Tekrejarôtire e Kaprãnkrere)."
     logo: "http://florestaprotegida.org.br/wp-content/uploads/2015/12/Logo_AFP_2015_Web-white.svg"
-    banner: "http://florestaprotegida.org.br/wp-content/uploads/2016/03/IMG_0973-2_invert.jpg"
+    headerImage: "http://florestaprotegida.org.br/wp-content/uploads/2016/03/IMG_0973-2_invert.jpg"
     subTitle: "Apoiar a autonomia política e econômica do Povo Mẽbêngôkre"
+    villageHtml: "bla blabla"
+    projectsHtml: "Bla bla bla"
+    categoriesHtml: "Bla bla bla"
+    youtubeLink: "https://youtube.com"
+    facebookLink: "https://facebook.com"
+    villages: {
+      create: [
+        {
+          name: "Badjônkôre"
+          mapLink: "https://www.google.com/maps/d/viewer?mid=1W28Oyr7k4muzJp270p83OX_rIfc&ll=-8.828833163082486%2C-51.910427839643944&z=11"
+        }
+        {
+          name: "Bau"
+          mapLink: "https://www.google.com/maps/d/viewer?mid=1W28Oyr7k4muzJp270p83OX_rIfc&ll=-7.367675901866272%2C-54.45290399999999&z=9"
+        }
+        {
+          name: "Capoto/Jarina"
+          mapLink: "https://www.google.com/maps/d/viewer?mid=1W28Oyr7k4muzJp270p83OX_rIfc&ll=-9.857172055165295%2C-53.23942732307387&z=10"
+        }
+        {
+          name: "Bytere"
+          mapLink: "https://www.google.com/maps/d/viewer?mid=1W28Oyr7k4muzJp270p83OX_rIfc&ll=-10.52719999999999%2C-53.089200000000005&z=10"
+        }
+      ]
+    }
+    categories: {
+      create: [
+        {
+          category: CAT1
+          name: "Cultura e Conhecimento"
+        }
+        {
+          category: CAT2
+          name: "Fortalecimento Institucional e Politico"
+        }
+        {
+          category: CAT3
+          name: "Atividades Produtivas e Geracao de Renda"
+        }
+        {
+          category: CAT4
+          name: "Gestao Ambiental e Territorial"
+        }
+      ]
+    }
   }) {
     title
   },
-  # productA: createProduct(data: {
-  #   price: 10000
-  #   stockQuantity: 10
-  #   name: "Malaleuca e lavanda"
-  #   slug: "malaleuca-e-lavanda"
-  #   description: "Sabão super delicado e ceboso"
-  #   image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
-  #   category: {
-  #     create: {
-  #       name: "Em barra"
-  #       slug: "em-barra"
-  #       image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
-  #       subCategories: {
-  #         create: {
-  #           name: "Peles secas"
-  #           slug: "peles-secas"
-  #         }
-  #       }
-  #     }
-  #   }
-  # }) {
-  #   id
-  # }
-  # productB: createProduct(data: {
-  #   price: 10000
-  #   stockQuantity: 10
-  #   name: "Óleo de castanha do pará"
-  #   slug: "oleo-para"
-  #   description: "Sabão super delicado e ceboso"
-  #   image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
-  #   category: {
-  #     create: {
-  #       name: "Líquido"
-  #       slug: "liquido"
-  #       image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
-  #       subCategories: {
-  #         create: {
-  #           name: "Peles oleosas"
-  #           slug: "peles-oleosas"
-  #           # category: {
-  #           #   connect: {
-  #           #     name: "Líquido",
-  #           #   }
-  #           # }
-  #         }
-  #       }
-  #     }
-  #   }
-  # }) {
-  #   id
-  # }
-  # productC: createProduct(data: {
-  #   price: 10000
-  #   stockQuantity: 10
-  #   name: "Pó dental"
-  #   slug: "po-dental"
-  #   description: "Melhor que Colgate"
-  #   image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
-  #   category: {
-  #     create: {
-  #       name: "Outros"
-  #       slug: "outros"
-  #       image: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
-  #       subCategories: {
-  #         connect: {
-  #           slug: "peles-oleosas"
-  #           # category: {
-  #           #   connect: {
-  #           #     name: "Dentes",
-  #           #   }
-  #           # }
-  #         }
-  #       }
-  #     }
-  #   }
-  # }) {
-  #   id
-  # }
-  # variantA: createProductVariant(
-  #   data: {
-  #     name: "Limão e capim santo"
-  #     product: {
-  #       connect: {
-  #         name: "Caixa Kombucha"
-  #       }
-  #     }
-  #   },
-  # ) {
-  #   name
-  # }
-  # variantB: createProductVariant(
-  #   data: {
-  #     name: "Abacaxi com hortelã"
-  #     product: {
-  #       connect: {
-  #         name: "Caixa Kombucha"
-  #       }
-  #     }
-  #   },
-  # ) {
-  #   name
-  # }
+  news1: createNews(data: {
+    title: "Noticia 1"
+    link: "https://edition.cnn.com/2019/08/08/world/ipcc-report-land-climate-crisis-sci-intl/index.html"
+    intro: "Prisma's auto-generated GraphQL API provides CRUD operations with powerful filtering, sorting, pagination and realtime capabilities."
+    description: "bla bla"
+    media: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+  }) {
+    id
+  }
+  news2: createNews(data: {
+    title: "Noticia 2"
+    link: "https://edition.cnn.com/2019/08/08/world/ipcc-report-land-climate-crisis-sci-intl/index.html"
+    intro: "Prisma's auto-generated GraphQL API provides CRUD operations with powerful filtering, sorting, pagination and realtime capabilities."
+    description: "bla bla"
+    media: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+  }) {
+    id
+  }
+  project1: createProject(data: {
+    name: "Projeto A"
+    category: {
+      set: CAT1
+    }
+    tags: {
+      create: [
+        {
+          name: "Castanha"
+        }
+         {
+          name: "EMF"
+        }
+         {
+          name: "Rio Xingu"
+        }
+        {
+          name: "Mata Mebgokre"
+        }
+      ]
+    }
+  }) {
+    id
+  }
+  project2: createProject(data: {
+    name: "Projeto B"
+    category: {
+      set: [CAT1 CAT2]
+    }
+    tags: {
+      create: [
+        {
+          name: "LSD"
+        }
+         {
+          name: "Ancestral"
+        }
+         {
+          name: "Rio Tapajos"
+        }
+        {
+          name: "Mata do Fundo"
+        }
+      ]
+    }
+  }) {
+    id
+  }
   createAdmin: createUser(data: {
     email: "admin@example.com"
     password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
@@ -120,10 +129,26 @@ mutation {
         title: "Hello World 👋"
         body: "<p>I like turtles.</p>"
         isPublished: true
+        news: {
+          create: {
+            title: "Hello"
+            intro: "Prisma's auto-generated GraphQL API provides CRUD operations with powerful filtering, sorting, pagination and realtime capabilities."
+            description: "bla bla"
+            media: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+          }
+        }
       }, {
         title: "Join us at GraphQL Europe 🇪🇺 "
         body: "<p>Get a 10%-discount with this promo code on graphql-europe.org: gql-boilerplates</p>"
         isPublished: true
+        news: {
+          create: {
+            title: "Join us"
+            intro: "Prisma's auto-generated GraphQL API provides CRUD operations with powerful filtering, sorting, pagination and realtime capabilities."
+            description: "bla bla"
+            media: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+          }
+        }
       }, {
         title: "Solving world hunger"
         body: "<p>This is a draft...</p>"
@@ -144,10 +169,26 @@ mutation {
         title: "Welcome to the universe 👋"
         body: "<p>I like turtles.</p>"
         isPublished: true
+         news: {
+          create: {
+            title: "Welcome to the universe 👋"
+            intro: "Prisma's auto-generated GraphQL API provides CRUD operations with powerful filtering, sorting, pagination and realtime capabilities."
+            description: "bla bla"
+            media: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+          }
+        }
       }, {
         title: "There will be flags 🇪🇺 "
         body: "<p>Get a 10%-discount with this promo code on graphql-europe.org: gql-boilerplates</p>"
         isPublished: true
+        news: {
+          create: {
+            title: "There will be flags 🇪🇺"
+            intro: "Prisma's auto-generated GraphQL API provides CRUD operations with powerful filtering, sorting, pagination and realtime capabilities."
+            description: "bla bla"
+            media: "https://static1.squarespace.com/static/59e65fd351a5843fcb31bd6e/59e90e3529f18770c2344a06/59f0cbd62aeba54873f4708a/1511392691939/Cinnamon-Awakening.jpg?format=1500w"
+          }
+        }
       }, {
         title: "Plan to overthrow the king"
         body: "<p>This is a draft...</p>"
@@ -159,7 +200,7 @@ mutation {
     id
   },
   createUser: createUser(data: {
-    email: "customer@example.com"
+    email: "reader@example.com"
     password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
     firstName: "John"
     lastName: "McKenley"

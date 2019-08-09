@@ -1,28 +1,28 @@
+input CategoryInput {
+  intro: String
+  description: String
+  name: String
+  media: String
+  category: String!
+}
+
 input ProjectInput {
   id: String
   name: String
   slug: String
+  intro: String
   description: String
   media: String
   photos: [String]
-  category: String
+  categories: [String]
   tags: [String]
-}
-
-input ProjectCategoryInput {
-  id: String
-  name: String
-  slug: String
-  description: String
-  media: String
-  icon: String
-  photos: [String]
 }
 
 input ProjectTagInput {
   id: String
   name: String
   slug: String
+  intro: String
   description: String
   media: String
   photos: [String]
@@ -32,6 +32,7 @@ input VillageInput {
   id: String
   name: String
   slug: String
+  intro: String
   description: String
   media: String
   photos: [String]
@@ -39,8 +40,10 @@ input VillageInput {
 
 input NewsInput {
   id: String
+  intro: String
   description: String
   link: String
+  post: String
   title: String
   media: String
 }

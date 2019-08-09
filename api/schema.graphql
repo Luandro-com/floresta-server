@@ -1,4 +1,4 @@
-# import Post, DateTime from "generated/prisma.graphql"
+# import Post, DateTime, Category from "generated/prisma.graphql"
 # import * from "types/user.graphql"
 # import * from "types/admin.graphql"
 # import * from "types/portal.graphql"
@@ -6,23 +6,22 @@
 scalar Upload
 
 type Query {
-  feed: [Post!]!
-  drafts: [Post!]!
+  posts(page: Int): [Post!]!
+  drafts(page: Int): [Post!]!
   post(id: ID!): Post
   user: User
-  users: [User]
-  admins: [User]
-  uploads: [File]
+  users(page: Int): [User]
+  admins(page: Int): [User]
+  uploads(page: Int): [File]
   content: Content
-  project(id: String slug: String): Project
-  projects: [Project]
-  projectCategories(id: String slug: String): [ProjectCategory]
-  projectTags(id: String slug: String): [ProjectTag]
+  project(id: String slug: String page: Int): Project
+  projects(page: Int): [Project]
+  categories(id: String slug: String page: Int): [Category]
+  projectTags(id: String slug: String page: Int): [ProjectTag]
   village(id: String slug: String): Village
-  villages: [Village]
+  villages(page: Int): [Village]
   news(id: String): News
-  newsAll: [News]
-
+  newsAll(page: Int): [News]
 }
 
 type Mutation {
@@ -42,12 +41,12 @@ type Mutation {
   resetPassword(password: String! hash: String!): Boolean
   updateContent(input: ContentInput!): Content
   saveProject(input: ProjectInput): Project
-  saveProjectCategory(input: ProjectCategoryInput): ProjectCategory
+  saveCategory(input: CategoryInput): Category
   saveProjectTag(input: ProjectTagInput): ProjectTag
   saveVillage(input: VillageInput): Village
   saveNews(input: NewsInput): News
   removeProject(id: ID!): String
-  removeProjectCategory(id: ID!): String
+  # removeProjectCategory(id: ID!): String
   removeProjectTag(id: ID!): String
   removeVillage(id: ID!): String
   removeNews(id: ID!): String

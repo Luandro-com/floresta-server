@@ -7,6 +7,7 @@ type Post {
   title: String!
   body: String!
   author: User!
+  news: News @relation(link: INLINE)
 }
 
 type User {
@@ -28,19 +29,32 @@ enum Role {
   READER
 }
 
+type Category {
+  id: ID! @id
+  intro: String
+  description: String
+  name: String
+  slug: String
+  media: String
+  category: ProjectCategory! @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
 type Content {
   id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  banner: String
+  headerImage: String
   title: String
   subTitle: String
   logo: String
-  description: String
-  villageText: String
-  projectsText: String
+  aboutHtml: String
+  villageHtml: String
+  projectsHtml: String
+  categoriesHtml: String
+  categories: [Category]
   villages: [Village]
-  mapLink: String
   youtubeLink: String
   facebookLink: String
 }
@@ -53,6 +67,8 @@ type Village {
   slug: String @unique
   photos: [String] @scalarList(strategy: RELATION)
   media: String
+  intro: String
+  mapLink: String
   description: String
   content: [Content]
 }
@@ -61,27 +77,36 @@ type Project {
   id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  category: ProjectCategory!
+  category: [ProjectCategory] @scalarList(strategy: RELATION)
   tags: [ProjectTag]
   name: String
   slug: String @unique
   photos: [String] @scalarList(strategy: RELATION)
   media: String
+  intro: String
   description: String
 }
 
-type ProjectCategory {
-  id: ID! @id
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-  name: String
-  slug: String @unique
-  photos: [String] @scalarList(strategy: RELATION)
-  media: String
-  icon: String
-  description: String
-  projects: [Project]
+enum ProjectCategory {
+  CAT1
+  CAT2
+  CAT3
+  CAT4
 }
+
+
+# type ProjectCategory {
+#   id: ID! @id
+#   createdAt: DateTime! @createdAt
+#   updatedAt: DateTime! @updatedAt
+#   name: String
+#   slug: String @unique
+#   photos: [String] @scalarList(strategy: RELATION)
+#   media: String
+#   icon: String
+#   description: String
+#   projects: [Project]
+# }
 
 type ProjectTag {
   id: ID! @id
@@ -91,16 +116,21 @@ type ProjectTag {
   slug: String @unique
   photos: [String] @scalarList(strategy: RELATION)
   media: String
+  intro: String
   description: String
   projects: [Project]
 }
 
 type News {
   id: ID! @id
+  intro: String
   description: String
   link: String
+  post: Post
   title: String
   media: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type NewsletterSubscription {
