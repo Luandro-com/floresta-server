@@ -21,7 +21,6 @@ const auth = {
     const { input } = args
     const id = input.id || ""
     let cleanInput = {}
-    console.log("================================", input)
     Object.keys(input).map(i => {
       if (i !== "id") Object.assign(cleanInput, { [i]: input[i] })
     })
@@ -29,7 +28,6 @@ const auth = {
       const password = await bcrypt.hash(input.password, 10)
       cleanInput.password = password
     }
-    console.log(cleanInput, id)
     const user = await ctx.db.mutation.upsertUser(
       {
         where: { id },
@@ -38,7 +36,6 @@ const auth = {
       },
       info
     )
-    console.log("USER", user)
     return user
   },
 
