@@ -11,7 +11,7 @@ type Query {
   post(id: ID!): Post
   user: User
   users(page: Int): [User]
-  admins(page: Int): [User]
+  admins(page: Int id: String): [User]
   uploads(page: Int): [File]
   content: Content
   project(id: String slug: String page: Int): Project
@@ -33,6 +33,7 @@ type Mutation {
   deletePost(id: ID!): Post!
   updateUser(input: UserInput): User!
   updateUserRole(userId: ID! role: Role!): User!
+  saveAdmin(input: AdminInput): User
   uploadFile(file: Upload!): File
   uploadFiles(file: Upload!): [File]
   renameFile(file: Upload!): File!
@@ -46,7 +47,6 @@ type Mutation {
   saveVillage(input: VillageInput): Village
   saveNews(input: NewsInput): News
   removeProject(id: ID!): String
-  # removeProjectCategory(id: ID!): String
   removeProjectTag(id: ID!): String
   removeVillage(id: ID!): String
   removeNews(id: ID!): String

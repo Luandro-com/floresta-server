@@ -44,7 +44,7 @@ input NewsInput {
   intro: String
   description: String
   link: String
-  post: String
+  post: Boolean
   title: String
   media: String
 }

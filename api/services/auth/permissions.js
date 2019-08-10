@@ -27,8 +27,11 @@ module.exports = shield(
     },
     Mutation: {
       updateUser: and(isAuthenticated),
+      resetPassword: and(isAuthenticated),
+
       login: not(isAuthenticated),
       updateUserRole: and(isAuthenticated, isAdmin),
+      saveAdmin: and(isAuthenticated, isAdmin),
       createDraft: or(isEditor, isAdmin),
       publish: or(isEditor, isAdmin),
       deletePost: or(isEditor, isAdmin),
@@ -38,9 +41,14 @@ module.exports = shield(
       saveProjectTag: or(isEditor, isAdmin),
       saveVillage: or(isEditor, isAdmin),
       removeProject: or(isEditor, isAdmin),
-      // removeProjectCategory: or(isEditor, isAdmin),
       removeProjectTag: or(isEditor, isAdmin),
-      removeVillage: or(isEditor, isAdmin)
+      removeVillage: or(isEditor, isAdmin),
+      uploadFile: or(isEditor, isAdmin),
+      uploadFiles: or(isEditor, isAdmin),
+      renameFile: or(isEditor, isAdmin),
+      deleteFile: or(isEditor, isAdmin),
+      saveNews: or(isEditor, isAdmin),
+      removeNews: or(isEditor, isAdmin)
     }
   },
   {

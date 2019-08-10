@@ -160,20 +160,55 @@ const admin = {
     )
   },
   async saveNews(parent, { input }, ctx, info) {
-    const cleanInput = {}
-    if (input.id) {
-      Object.keys(input).map(i => {
-        if (i !== "id") Object.assign(cleanInput, { [i]: input[i] })
-      })
+    console.log()
+    let cleanInput = {}
+    Object.keys(input).map(i => {
+      if (i !== "id" && i !== "post")
+        Object.assign(cleanInput, { [i]: input[i] })
+    })
+    if (input.post) {
+      const postUpdate = {
+        post: {
+          update: {
+            title: input.title,
+            body: input.description
+          }
+        }
+      }
+      const postCreate = {
+        post: {
+          create: {
+            title: input.title,
+            body: input.description,
+            author: {
+              connect: {
+                id: getUserId(ctx)
+              }
+            },
+            isPublished: true,
+            slug: slugify(input.title)
+          }
+        }
+      }
+      console.log({ ...cleanInput, ...postCreate })
+      return await ctx.db.mutation.upsertNews(
+        {
+          update: { ...cleanInput, ...postUpdate },
+          where: { id: input.id || "" },
+          create: { ...cleanInput, ...postCreate }
+        },
+        info
+      )
+    } else {
+      return await ctx.db.mutation.upsertNews(
+        {
+          update: cleanInput,
+          where: { id: input.id || "" },
+          create: input
+        },
+        info
+      )
     }
-    return await ctx.db.mutation.upsertNews(
-      {
-        update: cleanInput,
-        where: { id: input.id || "" },
-        create: input
-      },
-      info
-    )
   },
   async removeProject(parent, { id }, ctx, info) {
     const res = await ctx.db.mutation.deleteProject({
@@ -183,11 +218,6 @@ const admin = {
     console.log("ID", res.id)
     return res.id
   },
-  // async removeProjectCategory(parent, { id }, ctx, info) {
-  //   const res = await ctx.db.mutation.deleteProjectCategory({ where: { id } })
-  //   console.log("ID", res.id)
-  //   return res.id
-  // },
   async removeProjectTag(parent, { id }, ctx, info) {
     const res = await ctx.db.mutation.deleteProjectTag({ where: { id } })
     console.log("ID", res.id)

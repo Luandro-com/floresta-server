@@ -12,13 +12,21 @@ type User {
 enum Role {
   ADMIN
   EDITOR
-  CUSTOMER
-  DELIVERY
+  READER
 }
 
 input UserInput {
   firstName: String
   lastName: String
+}
+
+input AdminInput {
+  id: String
+  firstName: String
+  lastName: String
+  role: Role
+  password: String
+  email: String
 }
 
 type AuthPayload {

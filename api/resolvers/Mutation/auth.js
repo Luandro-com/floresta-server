@@ -1,7 +1,7 @@
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const { getUserId } = require('../../services/auth/utils')
-const sendResetEmail = require('../../services/auth/resetmail')
+const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
+const { getUserId } = require("../../services/auth/utils")
+const sendResetEmail = require("../../services/auth/resetmail")
 const uuid = require("uuid")
 
 const auth = {
@@ -9,12 +9,37 @@ const auth = {
     const password = await bcrypt.hash(args.password, 10)
     let user
     user = await ctx.db.mutation.createUser({
-      data: { ...args, password },
+      data: { ...args, password }
     })
     return {
       token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
-      user,
+      user
     }
+  },
+
+  async saveAdmin(parent, args, ctx, info) {
+    const { input } = args
+    const id = input.id || ""
+    let cleanInput = {}
+    console.log("================================", input)
+    Object.keys(input).map(i => {
+      if (i !== "id") Object.assign(cleanInput, { [i]: input[i] })
+    })
+    if (input.password) {
+      const password = await bcrypt.hash(input.password, 10)
+      cleanInput.password = password
+    }
+    console.log(cleanInput, id)
+    const user = await ctx.db.mutation.upsertUser(
+      {
+        where: { id },
+        update: cleanInput,
+        create: cleanInput
+      },
+      info
+    )
+    console.log("USER", user)
+    return user
   },
 
   async login(parent, { email, password }, ctx, info) {
@@ -25,12 +50,12 @@ const auth = {
 
     const valid = await bcrypt.compare(password, user.password)
     if (!valid) {
-      throw new Error('Invalid password')
+      throw new Error("Invalid password")
     }
 
     return {
       token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
-      user,
+      user
     }
   },
 
@@ -45,7 +70,7 @@ const auth = {
     await ctx.db.mutation.createResetPasswordRequest({
       data: {
         email,
-        hash,
+        hash
       }
     })
     const success = await sendResetEmail(email, hash)
@@ -54,9 +79,12 @@ const auth = {
 
   async resetPassword(parent, { password, hash }, ctx, info) {
     try {
-      const { email, reset } = await ctx.db.query.resetPasswordRequest({
-        where: { hash }
-      }, `{ email reset }`)
+      const { email, reset } = await ctx.db.query.resetPasswordRequest(
+        {
+          where: { hash }
+        },
+        `{ email reset }`
+      )
       if (!email || reset) {
         throw new Error(`Invalid reset email ticket`)
       }
@@ -78,7 +106,9 @@ const auth = {
         throw new Error(`Error closing ticket`)
       }
       return true
-    } catch(err) { throw err}
+    } catch (err) {
+      throw err
+    }
   },
 
   async updateUser(parent, { input }, ctx, info) {
@@ -89,9 +119,9 @@ const auth = {
     if (!user) {
       throw new Error(`You're not logged in.`)
     }
-    console.log('returning', user)
+    console.log("returning", user)
     return user
-  },
+  }
 }
 
 module.exports = { auth }

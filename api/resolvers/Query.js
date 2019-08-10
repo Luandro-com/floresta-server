@@ -44,15 +44,23 @@ const Query = {
   },
 
   async admins(parent, args, ctx, info) {
-    const { page } = args
-    const pagination = page
-      ? { skip: page > 1 ? page * 3 - 3 : 0, first: 3 }
-      : {}
-    const input = Object.assign(
-      pagination,
-      { orderBy: "createdAt_DESC" },
-      { where: { role_in: ["ADMIN", "EDITOR"] } }
-    )
+    const { page, id } = args
+    let input = {
+      orderBy: "createdAt_DESC",
+      where: { role_in: ["ADMIN", "EDITOR"] }
+    }
+    if (page) {
+      const pagination = page
+        ? { skip: page > 1 ? page * 3 - 3 : 0, first: 3 }
+        : {}
+      Object.assign(input, pagination)
+    } else if (id) {
+      Object.assign(input, {
+        where: {
+          id
+        }
+      })
+    }
     return await ctx.db.query.users(input, info)
   },
 
