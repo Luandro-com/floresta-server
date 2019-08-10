@@ -68,7 +68,9 @@ const Query = {
     )
   },
   categories(parent, args, ctx, info) {
-    return ctx.db.query.categories(null, info)
+    const { category, id, slug } = args
+    const where = category ? { category } : slug ? { slug } : { id }
+    return ctx.db.query.categories({ where }, info)
   },
 
   project(parent, args, ctx, info) {
@@ -104,7 +106,7 @@ const Query = {
       : {}
     let input = Object.assign(pagination, { orderBy: "name_ASC" })
     if (id) {
-      return ctx.db.query.projectTag({ where: { id } }, info)
+      return ctx.db.query.projectTags({ where: { id } }, info)
     } else if (slug) {
       return ctx.db.query.projectTags({ where: { slug } }, info)
     }

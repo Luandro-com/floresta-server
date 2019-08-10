@@ -73,7 +73,7 @@ mutation {
   }
   project1: createProject(data: {
     name: "Projeto A"
-    category: {
+    categories: {
       set: CAT1
     }
     tags: {
@@ -97,7 +97,7 @@ mutation {
   }
   project2: createProject(data: {
     name: "Projeto B"
-    category: {
+    categories: {
       set: [CAT1 CAT2]
     }
     tags: {

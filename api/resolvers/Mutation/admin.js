@@ -67,21 +67,36 @@ const admin = {
         }
       })
     }
+    let categoriesCreateConnections = {}
+    let categoriesUpdateConnections = {}
+
+    if (input.categories) {
+      Object.assign(categoriesUpdateConnections, {
+        categories: {
+          set: input.categories
+        }
+      })
+      Object.assign(categoriesCreateConnections, {
+        categories: {
+          set: input.categories
+        }
+      })
+    }
     const where = input.id ? { id: input.id } : { slug: input.slug }
     return await ctx.db.mutation.upsertProject(
       {
         update: {
           ...cleanInput,
           ...connections,
-          ...tagsUpdateConnections
-          // ...categoryUpdateConnections
+          ...tagsUpdateConnections,
+          ...categoriesUpdateConnections
         },
         where,
         create: {
           ...input,
           ...connections,
-          ...tagsCreateConnections
-          // ...categoryCreateConnections
+          ...tagsCreateConnections,
+          ...categoriesCreateConnections
         }
       },
       info
@@ -92,15 +107,15 @@ const admin = {
       input.slug = slugify(input.name)
     }
     const cleanInput = {}
-    if (input.id) {
+    if (input.category) {
       Object.keys(input).map(i => {
-        if (i !== "id") Object.assign(cleanInput, { [i]: input[i] })
+        if (i !== "category") Object.assign(cleanInput, { [i]: input[i] })
       })
     }
     return await ctx.db.mutation.upsertCategory(
       {
         update: cleanInput,
-        where: { id: input.id || "" },
+        where: { category: input.category || "" },
         create: input
       },
       info

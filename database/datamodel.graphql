@@ -36,6 +36,7 @@ type Category {
   name: String
   slug: String
   media: String
+  icon: String
   category: ProjectCategory! @unique
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -77,7 +78,7 @@ type Project {
   id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  category: [ProjectCategory] @scalarList(strategy: RELATION)
+  categories: [ProjectCategory] @scalarList(strategy: RELATION)
   tags: [ProjectTag]
   name: String
   slug: String @unique
