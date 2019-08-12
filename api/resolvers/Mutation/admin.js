@@ -23,24 +23,7 @@ const admin = {
       })
     }
     let connections = {}
-    // let categoryCreateConnections = {}
-    // let categoryUpdateConnections = {}
-    // if (input.category) {
-    //   Object.assign(categoryCreateConnections, {
-    //     category: {
-    //       connect: {
-    //         id: input.category
-    //       }
-    //     }
-    //   })
-    //   Object.assign(categoryUpdateConnections, {
-    //     category: {
-    //       connect: {
-    //         id: input.category
-    //       }
-    //     }
-    //   })
-    // }
+
     if (input.photos) {
       Object.assign(connections, {
         photos: {
@@ -67,40 +50,50 @@ const admin = {
         }
       })
     }
-    let categoriesCreateConnections = {}
     let categoriesUpdateConnections = {}
+    let categoriesCreateConnections = {}
 
-    if (input.categories) {
-      Object.assign(categoriesUpdateConnections, {
+    if (input.categories.length > 0) {
+      categoriesCreateConnections = {
         categories: {
-          set: input.categories
+          create: [],
+          connect: []
         }
-      })
-      Object.assign(categoriesCreateConnections, {
+      }
+      categoriesUpdateConnections = {
         categories: {
-          set: input.categories
+          set: []
         }
+      }
+      input.categories.map(c => {
+        categoriesCreateConnections.categories.create.push({
+          category: c
+        })
+        categoriesCreateConnections.categories.connect.push({
+          category: c
+        })
+        categoriesUpdateConnections.categories.set.push({
+          category: c
+        })
       })
     }
     const where = input.id ? { id: input.id } : { slug: input.slug }
-    return await ctx.db.mutation.upsertProject(
-      {
-        update: {
-          ...cleanInput,
-          ...connections,
-          ...tagsUpdateConnections,
-          ...categoriesUpdateConnections
-        },
-        where,
-        create: {
-          ...input,
-          ...connections,
-          ...tagsCreateConnections,
-          ...categoriesCreateConnections
-        }
+    const formatedInput = {
+      update: {
+        ...cleanInput,
+        ...connections,
+        ...tagsUpdateConnections,
+        ...categoriesUpdateConnections
       },
-      info
-    )
+      where,
+      create: {
+        ...input,
+        ...connections,
+        ...tagsCreateConnections,
+        ...categoriesCreateConnections
+      }
+    }
+    return await ctx.db.mutation.upsertProject(formatedInput, info)
   },
   async saveCategory(parent, { input }, ctx, info) {
     if (input.name && !input.slug) {
@@ -150,11 +143,18 @@ const admin = {
         if (i !== "id") Object.assign(cleanInput, { [i]: input[i] })
       })
     }
+    if (input.photos) {
+      Object.assign(cleanInput, {
+        photos: {
+          set: input.photos ? input.photos : null
+        }
+      })
+    }
     return await ctx.db.mutation.upsertVillage(
       {
         update: cleanInput,
         where: { id: input.id || "" },
-        create: input
+        create: cleanInput
       },
       info
     )

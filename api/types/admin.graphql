@@ -37,6 +37,7 @@ input VillageInput {
   description: String
   media: String
   photos: [String]
+  mapLink: String
 }
 
 input NewsInput {

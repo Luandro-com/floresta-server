@@ -16,7 +16,7 @@ type Query {
   content: Content
   project(id: String slug: String page: Int): Project
   projects(page: Int): [Project]
-  categories(category: ProjectCategory page: Int): [Category]
+  categories(category: ProjectCategory page: Int id: String slug: String): [Category]
   projectTags(id: String slug: String page: Int): [ProjectTag]
   village(id: String slug: String): Village
   villages(page: Int): [Village]

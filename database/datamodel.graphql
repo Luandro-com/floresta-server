@@ -38,8 +38,16 @@ type Category {
   media: String
   icon: String
   category: ProjectCategory! @unique
+  projects: [Project] @scalarList(strategy: RELATION)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+}
+
+enum ProjectCategory {
+  CAT1
+  CAT2
+  CAT3
+  CAT4
 }
 
 type Content {
@@ -78,7 +86,7 @@ type Project {
   id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  categories: [ProjectCategory] @scalarList(strategy: RELATION)
+  categories: [Category] @scalarList(strategy: RELATION)
   tags: [ProjectTag]
   name: String
   slug: String @unique
@@ -86,13 +94,6 @@ type Project {
   media: String
   intro: String
   description: String
-}
-
-enum ProjectCategory {
-  CAT1
-  CAT2
-  CAT3
-  CAT4
 }
 
 

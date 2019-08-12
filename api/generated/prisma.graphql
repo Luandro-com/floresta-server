@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Fri Aug 09 2019 19:47:48 GMT-0300 (GMT-03:00)
+# timestamp: Sun Aug 11 2019 11:54:39 GMT-0300 (GMT-03:00)
 
 type AggregateCategory {
   count: Int!
@@ -59,6 +59,7 @@ type Category implements Node {
   media: String
   icon: String
   category: ProjectCategory!
+  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -82,11 +83,28 @@ input CategoryCreateInput {
   media: String
   icon: String
   category: ProjectCategory!
+  projects: ProjectCreateManyWithoutCategoriesInput
 }
 
 input CategoryCreateManyInput {
   create: [CategoryCreateInput!]
   connect: [CategoryWhereUniqueInput!]
+}
+
+input CategoryCreateManyWithoutProjectsInput {
+  create: [CategoryCreateWithoutProjectsInput!]
+  connect: [CategoryWhereUniqueInput!]
+}
+
+input CategoryCreateWithoutProjectsInput {
+  id: ID
+  intro: String
+  description: String
+  name: String
+  slug: String
+  media: String
+  icon: String
+  category: ProjectCategory!
 }
 
 """An edge in a connection."""
@@ -524,6 +542,7 @@ input CategoryUpdateDataInput {
   media: String
   icon: String
   category: ProjectCategory
+  projects: ProjectUpdateManyWithoutCategoriesInput
 }
 
 input CategoryUpdateInput {
@@ -534,6 +553,7 @@ input CategoryUpdateInput {
   media: String
   icon: String
   category: ProjectCategory
+  projects: ProjectUpdateManyWithoutCategoriesInput
 }
 
 input CategoryUpdateManyDataInput {
@@ -568,9 +588,31 @@ input CategoryUpdateManyMutationInput {
   category: ProjectCategory
 }
 
+input CategoryUpdateManyWithoutProjectsInput {
+  create: [CategoryCreateWithoutProjectsInput!]
+  connect: [CategoryWhereUniqueInput!]
+  set: [CategoryWhereUniqueInput!]
+  disconnect: [CategoryWhereUniqueInput!]
+  delete: [CategoryWhereUniqueInput!]
+  update: [CategoryUpdateWithWhereUniqueWithoutProjectsInput!]
+  updateMany: [CategoryUpdateManyWithWhereNestedInput!]
+  deleteMany: [CategoryScalarWhereInput!]
+  upsert: [CategoryUpsertWithWhereUniqueWithoutProjectsInput!]
+}
+
 input CategoryUpdateManyWithWhereNestedInput {
   where: CategoryScalarWhereInput!
   data: CategoryUpdateManyDataInput!
+}
+
+input CategoryUpdateWithoutProjectsDataInput {
+  intro: String
+  description: String
+  name: String
+  slug: String
+  media: String
+  icon: String
+  category: ProjectCategory
 }
 
 input CategoryUpdateWithWhereUniqueNestedInput {
@@ -578,10 +620,21 @@ input CategoryUpdateWithWhereUniqueNestedInput {
   data: CategoryUpdateDataInput!
 }
 
+input CategoryUpdateWithWhereUniqueWithoutProjectsInput {
+  where: CategoryWhereUniqueInput!
+  data: CategoryUpdateWithoutProjectsDataInput!
+}
+
 input CategoryUpsertWithWhereUniqueNestedInput {
   where: CategoryWhereUniqueInput!
   update: CategoryUpdateDataInput!
   create: CategoryCreateInput!
+}
+
+input CategoryUpsertWithWhereUniqueWithoutProjectsInput {
+  where: CategoryWhereUniqueInput!
+  update: CategoryUpdateWithoutProjectsDataInput!
+  create: CategoryCreateWithoutProjectsInput!
 }
 
 input CategoryWhereInput {
@@ -927,6 +980,9 @@ input CategoryWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  projects_every: ProjectWhereInput
+  projects_some: ProjectWhereInput
+  projects_none: ProjectWhereInput
 }
 
 input CategoryWhereUniqueInput {
@@ -3991,7 +4047,7 @@ type Project implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  categories: [ProjectCategory!]!
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
   tags(where: ProjectTagWhereInput, orderBy: ProjectTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProjectTag!]
   name: String
   slug: String
@@ -4018,10 +4074,6 @@ type ProjectConnection {
   aggregate: AggregateProject!
 }
 
-input ProjectCreatecategoriesInput {
-  set: [ProjectCategory!]
-}
-
 input ProjectCreateInput {
   id: ID
   name: String
@@ -4029,9 +4081,14 @@ input ProjectCreateInput {
   media: String
   intro: String
   description: String
-  categories: ProjectCreatecategoriesInput
   photos: ProjectCreatephotosInput
+  categories: CategoryCreateManyWithoutProjectsInput
   tags: ProjectTagCreateManyWithoutProjectsInput
+}
+
+input ProjectCreateManyWithoutCategoriesInput {
+  create: [ProjectCreateWithoutCategoriesInput!]
+  connect: [ProjectWhereUniqueInput!]
 }
 
 input ProjectCreateManyWithoutTagsInput {
@@ -4043,6 +4100,17 @@ input ProjectCreatephotosInput {
   set: [String!]
 }
 
+input ProjectCreateWithoutCategoriesInput {
+  id: ID
+  name: String
+  slug: String
+  media: String
+  intro: String
+  description: String
+  photos: ProjectCreatephotosInput
+  tags: ProjectTagCreateManyWithoutProjectsInput
+}
+
 input ProjectCreateWithoutTagsInput {
   id: ID
   name: String
@@ -4050,8 +4118,8 @@ input ProjectCreateWithoutTagsInput {
   media: String
   intro: String
   description: String
-  categories: ProjectCreatecategoriesInput
   photos: ProjectCreatephotosInput
+  categories: CategoryCreateManyWithoutProjectsInput
 }
 
 """An edge in a connection."""
@@ -4086,7 +4154,6 @@ type ProjectPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  categories: [ProjectCategory!]!
   name: String
   slug: String
   photos: [String!]!
@@ -5224,18 +5291,14 @@ input ProjectTagWhereUniqueInput {
   slug: String
 }
 
-input ProjectUpdatecategoriesInput {
-  set: [ProjectCategory!]
-}
-
 input ProjectUpdateInput {
   name: String
   slug: String
   media: String
   intro: String
   description: String
-  categories: ProjectUpdatecategoriesInput
   photos: ProjectUpdatephotosInput
+  categories: CategoryUpdateManyWithoutProjectsInput
   tags: ProjectTagUpdateManyWithoutProjectsInput
 }
 
@@ -5245,7 +5308,6 @@ input ProjectUpdateManyDataInput {
   media: String
   intro: String
   description: String
-  categories: ProjectUpdatecategoriesInput
   photos: ProjectUpdatephotosInput
 }
 
@@ -5255,8 +5317,19 @@ input ProjectUpdateManyMutationInput {
   media: String
   intro: String
   description: String
-  categories: ProjectUpdatecategoriesInput
   photos: ProjectUpdatephotosInput
+}
+
+input ProjectUpdateManyWithoutCategoriesInput {
+  create: [ProjectCreateWithoutCategoriesInput!]
+  connect: [ProjectWhereUniqueInput!]
+  set: [ProjectWhereUniqueInput!]
+  disconnect: [ProjectWhereUniqueInput!]
+  delete: [ProjectWhereUniqueInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutCategoriesInput!]
+  updateMany: [ProjectUpdateManyWithWhereNestedInput!]
+  deleteMany: [ProjectScalarWhereInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutCategoriesInput!]
 }
 
 input ProjectUpdateManyWithoutTagsInput {
@@ -5280,19 +5353,40 @@ input ProjectUpdatephotosInput {
   set: [String!]
 }
 
+input ProjectUpdateWithoutCategoriesDataInput {
+  name: String
+  slug: String
+  media: String
+  intro: String
+  description: String
+  photos: ProjectUpdatephotosInput
+  tags: ProjectTagUpdateManyWithoutProjectsInput
+}
+
 input ProjectUpdateWithoutTagsDataInput {
   name: String
   slug: String
   media: String
   intro: String
   description: String
-  categories: ProjectUpdatecategoriesInput
   photos: ProjectUpdatephotosInput
+  categories: CategoryUpdateManyWithoutProjectsInput
+}
+
+input ProjectUpdateWithWhereUniqueWithoutCategoriesInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutCategoriesDataInput!
 }
 
 input ProjectUpdateWithWhereUniqueWithoutTagsInput {
   where: ProjectWhereUniqueInput!
   data: ProjectUpdateWithoutTagsDataInput!
+}
+
+input ProjectUpsertWithWhereUniqueWithoutCategoriesInput {
+  where: ProjectWhereUniqueInput!
+  update: ProjectUpdateWithoutCategoriesDataInput!
+  create: ProjectCreateWithoutCategoriesInput!
 }
 
 input ProjectUpsertWithWhereUniqueWithoutTagsInput {
@@ -5594,6 +5688,9 @@ input ProjectWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  categories_every: CategoryWhereInput
+  categories_some: CategoryWhereInput
+  categories_none: CategoryWhereInput
   tags_every: ProjectTagWhereInput
   tags_some: ProjectTagWhereInput
   tags_none: ProjectTagWhereInput

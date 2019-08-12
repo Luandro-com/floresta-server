@@ -35,18 +35,22 @@ mutation {
         {
           category: CAT1
           name: "Cultura e Conhecimento"
+          slug: "cultura-e-conhecimento"
         }
         {
           category: CAT2
-          name: "Fortalecimento Institucional e Politico"
+          name: "Fortalecimento Institucional e Político"
+          slug: "fortalecimento-institucional-e-politico"
         }
         {
           category: CAT3
           name: "Atividades Produtivas e Geracao de Renda"
+          slug: "atividades-produtivas-e-geracao-de-rende"
         }
         {
           category: CAT4
           name: "Gestao Ambiental e Territorial"
+          slug: "gestao-ambiental-e-territorial"
         }
       ]
     }
@@ -74,7 +78,9 @@ mutation {
   project1: createProject(data: {
     name: "Projeto A"
     categories: {
-      set: CAT1
+      connect: [{
+        category: CAT1
+      }]
     }
     tags: {
       create: [
@@ -98,7 +104,14 @@ mutation {
   project2: createProject(data: {
     name: "Projeto B"
     categories: {
-      set: [CAT1 CAT2]
+      connect: [
+        {
+          category: CAT1
+        }
+        {
+          category: CAT2
+        }
+      ]
     }
     tags: {
       create: [

@@ -8,6 +8,7 @@ const isAuthenticated = rule()(async (parent, args, ctx, info) => {
 const isAdmin = rule()(async (parent, args, ctx, info) => {
   const id = getUserId(ctx)
   const user = await ctx.db.query.user({ where: { id } })
+  console.log("=========================================>", user.role)
   return user.role === "ADMIN"
 })
 
@@ -28,7 +29,6 @@ module.exports = shield(
     Mutation: {
       updateUser: and(isAuthenticated),
       resetPassword: and(isAuthenticated),
-
       login: not(isAuthenticated),
       updateUserRole: and(isAuthenticated, isAdmin),
       saveAdmin: and(isAuthenticated, isAdmin),
@@ -43,7 +43,7 @@ module.exports = shield(
       removeProject: or(isEditor, isAdmin),
       removeProjectTag: or(isEditor, isAdmin),
       removeVillage: or(isEditor, isAdmin),
-      uploadFile: or(isEditor, isAdmin),
+      // uploadFile: or(isEditor, isAdmin),
       uploadFiles: or(isEditor, isAdmin),
       renameFile: or(isEditor, isAdmin),
       deleteFile: or(isEditor, isAdmin),
