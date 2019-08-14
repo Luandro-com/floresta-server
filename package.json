@@ -40,6 +40,7 @@
     "nodemailer": "^6.0.0",
     "pagseguro.js": "latest",
     "prisma-binding": "^2.3.10",
+    "readable-stream": "^3.4.0",
     "shortid": "^2.2.14",
     "uuid": "^3.3.2"
   },
