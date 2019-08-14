@@ -1,6 +1,15 @@
 #!/bin/sh
-echo "What is the hostname?\n"
-read HOSTDOMAIN
+
+# Hostname
+read -p "What is the project's hostname? default encenar.tk\n " HOSTDOMAIN
+HOSTDOMAIN=${HOSTDOMAIN:-encenar.tk}
+echo "$HOSTDOMAIN\n"
+
+# Hostname
+read -p "What is the project's hostname?\n " HOSTDOMAIN
+HOSTDOMAIN=${HOSTDOMAIN:-encenar.tk}
+echo "$HOSTDOMAIN\n"
+
 # echo "\n What is the prisma end-point?\n"
 # read PRISMA_ENDPOINT
 # echo "\n What is the prisma secret?\n"
