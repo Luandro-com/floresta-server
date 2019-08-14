@@ -33,12 +33,12 @@ S3_ENDPOINT="https://terrakryadev.nyc3.digitaloceanspaces.com"
 dokku docker-options:add floresta-prisma-server build '--file prisma.dockerfile'
 
 echo "\n\nMysql password: ${PASSWORD}"
-echo "\n\n\Prisma secret: ${PRISMA_SECRET}"
-echo "\n\n\Prisma managment api secret: ${PRISMA_MANAGEMENT_API_SECRET}"
-echo "\n\n\App secret: ${APP_SECRET}"
+echo "\n\nPrisma secret: ${PRISMA_SECRET}"
+echo "\n\nPrisma managment api secret: ${PRISMA_MANAGEMENT_API_SECRET}"
+echo "\n\nApp secret: ${APP_SECRET}"
 
 echo "\n\n\n\n Now add dokku as remote on your development machine:"
-echo "\ngit remote add dokku dokku@$HOSTDOMAIN:service\n\n\n\n\n\n\n\n\n"
+echo "\ngit remote add dokku dokku@$HOSTDOMAIN:service\n\n\n\"
 echo "Done!"
 # git remote add dokku dokku@encenar.tk:floresta-server
 # git remote add dokku dokku@encenar.tk:floresta-prisma-server
