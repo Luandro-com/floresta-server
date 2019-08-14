@@ -39,18 +39,20 @@ dokku buildpacks:add floresta-web https://github.com/heroku/heroku-buildpack-nod
 
 dokku mysql:create florestaprotegida
 dokku mysql:link florestaprotegida floresta-prisma-server
+
 dokku config:set floresta-server \
-DATABASE_URL=mysql.$HOSTDOMAIN
+DATABASE_URL=mysql.$HOSTDOMAIN \
 DATABASE_PASSWORD=$PASSWORD \
 NODE_ENV="production" \
 PRODUCTION="true" \
 PRISMA_STAGE="production" \
 PRISMA_ENDPOINT="https://us1.prisma.sh/luandro-93a3b2/florestaprotegida/dev" \
-PRISMA_SECRET=$PRISMA_SECRET \
-PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET \
+PRISMA_SECRET="mysecret123" \
+PRISMA_MANAGEMENT_API_SECRET='mysupersecret123' \
 APP_SECRET=$APP_SECRET \
 S3_BUCKET_NAME="florestaprotegida" \
 S3_ENDPOINT="https://terrakryadev.nyc3.digitaloceanspaces.com"
+
 dokku docker-options:add floresta-prisma-server build '--file prisma.dockerfile'
 
 echo "\n\nMysql password: ${PASSWORD}"
