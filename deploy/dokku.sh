@@ -9,14 +9,28 @@ PASSWORD=$(date +%s|sha256sum|base64|head -c 32)
 PRISMA_SECRET=$(date +%s|sha256sum|base64|head -c 32)
 PRISMA_MANAGEMENT_API_SECRET=$(date +%s|sha256sum|base64|head -c 32)
 APP_SECRET=$(date +%s|sha256sum|base64|head -c 32)
+
+sudo dokku plugin:install https://github.com/dokku/dokku-mysql.git
+sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+
 dokku apps:create floresta-prisma-server
 dokku apps:create floresta-server
 dokku apps:create floresta-admin
 dokku apps:create floresta-web
-sudo dokku plugin:install https://github.com/dokku/dokku-mysql.git
+
+dokku config:set --no-restart floresta-prisma-server DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
+dokku config:set --no-restart floresta-server DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
+dokku config:set --no-restart floresta-admin DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
+dokku config:set --no-restart floresta-web DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
+
+dokku buildpacks:add floresta-server https://github.com/heroku/heroku-buildpack-nodejs.git
+dokku buildpacks:add floresta-admin https://github.com/heroku/heroku-buildpack-nodejs.git
+dokku buildpacks:add floresta-web https://github.com/heroku/heroku-buildpack-nodejs.git
+
+
 dokku mysql:create florestaprotegida
 dokku mysql:link florestaprotegida floresta-prisma-server
-dokku config:set floresta-prisma-server \
+dokku config:set floresta-server \
 DATABASE_URL=mysql.$HOSTDOMAIN
 DATABASE_PASSWORD=$PASSWORD \
 NODE_ENV="production" \
@@ -27,8 +41,6 @@ PRISMA_SECRET=$PRISMA_SECRET \
 PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET \
 APP_SECRET=$APP_SECRET \
 S3_BUCKET_NAME="florestaprotegida" \
-# S3_AWS_SECRET_ACCESS_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
-# S3_AWS_ACCESS_KEY_ID="AKIAIOSFODNN7EXAMPLE" \
 S3_ENDPOINT="https://terrakryadev.nyc3.digitaloceanspaces.com"
 dokku docker-options:add floresta-prisma-server build '--file prisma.dockerfile'
 
