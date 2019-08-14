@@ -1,5 +1,5 @@
 # Pull prisma image from dockerhub
-FROM prismagraphql/prisma:1.26.0
+FROM prismagraphql/prisma:1.34.0
 
 # Tell docker there are arguments we need
 ARG SQL_HOST

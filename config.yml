@@ -1,0 +1,9 @@
+port: 4466
+databases:
+  default:
+    connector: mysql
+    host: ${DATABASE_URL}
+    port: 5432
+    user: mysql
+    password: ${DATABASE_PASSWORD}
+    migrations: true
