@@ -6,5 +6,5 @@ sudo dokku plugin:install https://github.com/dokku/dokku-mysql.git
 dokku mysql:create florestaprotegida
 dokku mysql:link florestaprotegida floresta-prisma-server
 dokku docker-options:add floresta-prisma-server build '--file prisma.dockerfile'
-# git remote add dokku dokku@ensenar.tk:floresta-server
-# git remote add dokku dokku@ensenar.tk:floresta-prisma-server
+# git remote add dokku dokku@encenar.tk:floresta-server
+# git remote add dokku dokku@encenar.tk:floresta-prisma-server
