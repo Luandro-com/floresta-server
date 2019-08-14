@@ -1,8 +1,8 @@
 {
   "name": "florestaprotegida-server",
   "scripts": {
-    "production": "node api/index.js",
-    "start": "nodemon -e js,graphql -x node -r dotenv/config api/index.js",
+    "start": "node api/index.js",
+    "api": "nodemon -e js,graphql -x node -r dotenv/config api/index.js",
     "debug": "nodemon -e js,graphql -x node --inspect -r dotenv/config api/index.js",
     "playground": "graphql playground",
     "dev": "npm-run-all --parallel start playground",
