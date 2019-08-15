@@ -46,6 +46,7 @@ DATABASE_URL=mysql.$HOSTDOMAIN \
 DATABASE_PASSWORD=$PASSWORD \
 
 dokku config:set floresta-prisma-server \
+DOKKU_PROXY_PORT_MAP="http:80:4000 https:443:4000" \
 NODE_ENV="production" \
 PRODUCTION="true" \
 DATABASE_URL=$DATABASE_URL \
@@ -69,7 +70,14 @@ S3_AWS_ACCESS_KEY_ID="BAIBUMIBET5EYUTJ4JKH"
 # PRISMA_ENDPOINT="https://floresta-prisma-server.${HOSTDOMAIN}" \
 
 
+dokku config:set floresta-admin \
+DOKKU_PROXY_PORT_MAP="http:80:3005 https:443:3005" \
+NODE_ENV="production" \
+PRODUCTION="true" \
+API_HOST="https://floresta-server.${HOSTDOMAIN}"
+
 dokku config:set floresta-web \
+DOKKU_PROXY_PORT_MAP="http:80:3000 https:443:3000" \
 NODE_ENV="production" \
 PRODUCTION="true" \
 API_HOST="https://floresta-server.${HOSTDOMAIN}"
