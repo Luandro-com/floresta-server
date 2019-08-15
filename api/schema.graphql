@@ -8,19 +8,19 @@ scalar Upload
 type Query {
   posts(page: Int): [Post!]!
   drafts(page: Int): [Post!]!
-  post(id: ID!): Post
+  post(id: ID slug: String): Post
   user: User
   users(page: Int): [User]
-  admins(page: Int id: String): [User]
+  admins(page: Int id: ID): [User]
   uploads(page: Int): [File]
   content: Content
-  project(id: String slug: String page: Int): Project
+  project(id: ID slug: String page: Int): Project
   projects(page: Int): [Project]
-  categories(category: ProjectCategory page: Int id: String slug: String): [Category]
-  projectTags(id: String slug: String page: Int): [ProjectTag]
-  village(id: String slug: String): Village
+  categories(category: ProjectCategory page: Int id: ID slug: String): [Category]
+  projectTags(id: ID slug: String page: Int): [ProjectTag]
+  village(id: ID slug: String): Village
   villages(page: Int): [Village]
-  news(id: String): News
+  news(id: ID slug: String): News
   newsAll(page: Int): [News]
 }
 

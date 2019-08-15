@@ -32,12 +32,11 @@ const Query = {
     return ctx.db.query.posts(input, info)
   },
 
-  post(parent, { id }, ctx, info) {
+  post(parent, { id, slug }, ctx, info) {
+    const where = slug ? { slug } : { id }
     return ctx.db.query.post(
       {
-        where: {
-          id
-        }
+        where
       },
       info
     )
@@ -136,11 +135,9 @@ const Query = {
     const input = Object.assign(pagination, { orderBy: "name_ASC" })
     return ctx.db.query.villages(input, info)
   },
-  news(parent, args, ctx, info) {
-    const { id } = args
-    if (id) {
-      return ctx.db.query.news({ where: { id } }, info)
-    }
+  news(parent, { id, slug }, ctx, info) {
+    const where = slug ? { slug } : { id }
+    return ctx.db.query.news({ where }, info)
   },
   newsAll(parent, args, ctx, info) {
     const { page } = args
