@@ -38,7 +38,21 @@ const server = new GraphQLServer({
   uploads: { maxFileSize: 10000000, maxFiles: 10 }
 })
 
-server.use("*", cors())
+var whitelist = [
+  "https://floresta-admin.encenar.tk",
+  "https://floresta-web.encenar.tk"
+]
+var corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  }
+}
+
+server.use(cors(corsOptions))
 
 server.start(() => console.log("Server is running on http://localhost:4000"))
 
