@@ -5,19 +5,35 @@ read -p "What is the project's hostname? default encenar.tk\n " HOSTDOMAIN
 HOSTDOMAIN=${HOSTDOMAIN:-encenar.tk}
 echo "$HOSTDOMAIN\n"
 
+read -p "What is the prisma end-point? default https://floresta-prisma-server.${HOSTDOMAIN}\n " PRISMA_ENDPOINT
+PRISMA_ENDPOINT=${PRISMA_ENDPOINT:-https://floresta-prisma-server.${HOSTDOMAIN}}
+echo "$PRISMA_ENDPOINT\n"
+
+read -p "What is the prisma secret? default generate random\n " PRISMA_SECRET
+PRISMA_SECRET=${PRISMA_SECRET:-$(date +%s|sha256sum|base64|head -c 32)}
+echo "$PRISMA_SECRET\n"
+
+read -p "What is the prisma management api secret? default generate random\n " PRISMA_MANAGEMENT_API_SECRET
+PRISMA_MANAGEMENT_API_SECRET=${PRISMA_MANAGEMENT_API_SECRET:-$(date +%s|sha256sum|base64|head -c 32)}
+echo "$PRISMA_MANAGEMENT_API_SECRET\n"
+
+read -p "What is the file space's enpoint? default https://nyc3.digitaloceanspaces.com\n " S3_ENDPOINT
+S3_ENDPOINT=${S3_ENDPOINT:-https://nyc3.digitaloceanspaces.com}
+echo "$S3_ENDPOINT\n"
+
+echo "\nWhat is the file spaces bucket name?\n"
+read S3_BUCKET_NAME
+
 echo "\nWhat is the file spaces id?\n"
 read S3_AWS_ACCESS_KEY_ID
 
 echo "\nWhat is the file spaces secret?\n"
 read S3_AWS_SECRET_ACCESS_KEY
 
-# echo "\n What is the prisma end-point?\n"
-# read PRISMA_ENDPOINT
-# echo "\n What is the prisma secret?\n"
-# read PRISMA_SECRET
-PASSWORD=$(date +%s|sha256sum|base64|head -c 32)
-PRISMA_SECRET=$(date +%s|sha256sum|base64|head -c 32)
-PRISMA_MANAGEMENT_API_SECRET=$(date +%s|sha256sum|base64|head -c 32)
+echo "\nWhat is the file spaces secret?\n"
+read S3_AWS_SECRET_ACCESS_KEY
+
+DATABASE_PASSWORD=$(date +%s|sha256sum|base64|head -c 32)
 APP_SECRET=$(date +%s|sha256sum|base64|head -c 32)
 
 sudo dokku plugin:install https://github.com/dokku/dokku-mysql.git
@@ -43,7 +59,7 @@ dokku mysql:link florestaprotegida floresta-prisma-server
 dokku docker-options:add floresta-prisma-server build '--file prisma.dockerfile'
 
 DATABASE_URL=mysql.$HOSTDOMAIN \
-DATABASE_PASSWORD=$PASSWORD \
+DATABASE_PASSWORD=$DATABASE_PASSWORD \
 
 dokku config:set floresta-prisma-server \
 DOKKU_PROXY_PORT_MAP="http:80:4000 https:443:4000" \
@@ -58,14 +74,13 @@ dokku config:set floresta-server \
 NODE_ENV="production" \
 PRODUCTION="true" \
 PRISMA_STAGE="production" \
-PRISMA_ENDPOINT="https://us1.prisma.sh/luandro-93a3b2/florestaprotegida/dev" \
-PRISMA_SECRET="mysecret123" \
-PRISMA_MANAGEMENT_API_SECRET='mysupersecret123' \
+PRISMA_ENDPOINT=$PRISMA_ENDPOINT \
+PRISMA_SECRET=$PRISMA_SECRET \
 APP_SECRET=$APP_SECRET \
-S3_BUCKET_NAME="terrakryadev" \
+S3_BUCKET_NAME=$S3_BUCKET_NAME \
 S3_ENDPOINT="https://nyc3.digitaloceanspaces.com" \
-S3_AWS_SECRET_ACCESS_KEY="xWPVlapFHNRSNanAMYK11uNM7XrIfDH8FxafHP9YeW4" \
-S3_AWS_ACCESS_KEY_ID="BAIBUMIBET5EYUTJ4JKH"
+S3_AWS_SECRET_ACCESS_KEY=$S3_AWS_SECRET_ACCESS_KEY \
+S3_AWS_ACCESS_KEY_ID=$S3_AWS_ACCESS_KEY_ID
 
 # PRISMA_ENDPOINT="https://floresta-prisma-server.${HOSTDOMAIN}" \
 

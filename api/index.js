@@ -6,13 +6,6 @@ const { Prisma } = require("prisma-binding")
 // const { forward } = require('graphql-middleware-forward-binding')
 const permissions = require("./services/auth/permissions")
 
-console.log(
-  "process.env",
-  process.env.APP_SECRET,
-  process.env.S3_AWS_SECRET_ACCESS_KEY,
-  process.env.S3_ENDPOINT
-)
-
 const db = new Prisma({
   typeDefs: "api/generated/prisma.graphql", // the auto-generated GraphQL schema of the Prisma API
   endpoint: process.env.PRISMA_ENDPOINT, // the endpoint of the Prisma API (value set in `.env`)

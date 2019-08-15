@@ -19,6 +19,7 @@ const auth = {
 
   async saveAdmin(parent, args, ctx, info) {
     const { input } = args
+
     const id = input.id || ""
     let cleanInput = {}
     Object.keys(input).map(i => {
