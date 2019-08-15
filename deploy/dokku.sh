@@ -63,8 +63,11 @@ PRISMA_MANAGEMENT_API_SECRET='mysupersecret123' \
 APP_SECRET=$APP_SECRET \
 S3_BUCKET_NAME="terrakryadev" \
 S3_ENDPOINT="https://nyc3.digitaloceanspaces.com" \
-S3_AWS_SECRET_ACCESS_KEY = "xWPVlapFHNRSNanAMYK11uNM7XrIfDH8FxafHP9YeW4" \
-S3_AWS_ACCESS_KEY_ID = "BAIBUMIBET5EYUTJ4JKH"
+S3_AWS_SECRET_ACCESS_KEY="xWPVlapFHNRSNanAMYK11uNM7XrIfDH8FxafHP9YeW4" \
+S3_AWS_ACCESS_KEY_ID="BAIBUMIBET5EYUTJ4JKH"
+
+# PRISMA_ENDPOINT="https://floresta-prisma-server.${HOSTDOMAIN}" \
+
 
 dokku config:set floresta-web \
 NODE_ENV="production" \
@@ -78,7 +81,7 @@ echo "\n\nPrisma managment api secret: ${PRISMA_MANAGEMENT_API_SECRET}"
 echo "\n\nApp secret: ${APP_SECRET}"
 
 echo "\n\n\n\n Now add dokku as remote on your development machine:"
-echo "\ngit remote add dokku dokku@${HOSTDOMAIN}:service\n\n\n\"
+echo "\ngit remote add dokku dokku@${HOSTDOMAIN}:service\n\n\n"
 echo "Done!"
 
 # Add remotes to each projecet
@@ -88,7 +91,10 @@ echo "Done!"
 # git remote add dokku dokku@encenar.tk:floresta-web
 
 # Run for eaech app after they have been deployed.
+# https://github.com/dokku/dokku-letsencrypt#dockerfile-deploys
+# dokku proxy:ports-add floresta-prisma-server http:80:4000
 # dokku letsencrypt floresta-prisma-server
+# dokku proxy:ports-add floresta-prisma-server https:443:4000
 # dokku letsencrypt floresta-server
 # dokku letsencrypt floresta-admin
 # dokku letsencrypt floresta-web
