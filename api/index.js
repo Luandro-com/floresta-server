@@ -52,7 +52,7 @@ var corsOptions = {
   }
 }
 
-server.use(cors(corsOptions))
+server.use(cors(process.env.NODE_ENV === "production" ? corsOptions : {}))
 
 server.start(() => console.log("Server is running on http://localhost:4000"))
 
