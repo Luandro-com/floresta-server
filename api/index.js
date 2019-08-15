@@ -38,7 +38,7 @@ const server = new GraphQLServer({
   uploads: { maxFileSize: 10000000, maxFiles: 10 }
 })
 
-server.use(cors())
+server.use("*", cors())
 
 server.start(() => console.log("Server is running on http://localhost:4000"))
 
