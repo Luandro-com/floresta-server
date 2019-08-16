@@ -45,7 +45,7 @@ mutation {
         {
           category: CAT3
           name: "Atividades Produtivas e Geracao de Renda"
-          slug: "atividades-produtivas-e-geracao-de-rende"
+          slug: "atividades-produtivas-e-geracao-de-renda"
         }
         {
           category: CAT4
