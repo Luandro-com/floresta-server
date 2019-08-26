@@ -55,17 +55,16 @@ dokku config:set --global DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
 # dokku config:set --no-restart floresta-admin DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
 # dokku config:set --no-restart floresta-web DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
 
-dokku mysql:create florestaprotegida
-dokku mysql:link florestaprotegida floresta-prisma-server
+dokku mysql:create florestaprotegida-db
+dokku mysql:link florestaprotegida-db floresta-prisma-server
 dokku docker-options:add floresta-prisma-server build '--file prisma.dockerfile'
 
-DATABASE_URL=mysql.$HOSTDOMAIN \
 DATABASE_PASSWORD=$DATABASE_PASSWORD \
 
 dokku config:set floresta-prisma-server \
 NODE_ENV="production" \
 PRODUCTION="true" \
-DATABASE_URL=$DATABASE_URL \
+DATABASE_URL="dokku-mysql-florestaprotegida-db" \
 DATABASE_PASSWORD=$DATABASE_PASSWORD \
 PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET \
 APP_SECRET=$APP_SECRET
@@ -75,6 +74,7 @@ APP_SECRET=$APP_SECRET
 # dokku proxy:ports-add floresta-prisma-server http:80:4466
 # dokku letsencrypt floresta-prisma-server
 # dokku proxy:ports-add floresta-prisma-server https:443:4466
+# dokku proxy:ports-remove floresta-prisma-server http:4000:4000
 # dokku letsencrypt floresta-server
 # dokku letsencrypt floresta-admin
 # dokku letsencrypt floresta-web
