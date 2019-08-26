@@ -1,35 +1,37 @@
 #!/bin/sh
 
 # Hostname
-read -p "What is the project's hostname? default encenar.tk\n " HOSTDOMAIN
+read -p "What is the project's hostname [encenar.tk]? " HOSTDOMAIN
 HOSTDOMAIN=${HOSTDOMAIN:-encenar.tk}
-echo "$HOSTDOMAIN\n"
+echo "$HOSTDOMAIN"
 
-read -p "What is the prisma end-point? default https://floresta-prisma-server.${HOSTDOMAIN}\n " PRISMA_ENDPOINT
+read -p "What is the prisma end-point [https://floresta-prisma-server.${HOSTDOMAIN}]? " PRISMA_ENDPOINT
 PRISMA_ENDPOINT=${PRISMA_ENDPOINT:-https://floresta-prisma-server.${HOSTDOMAIN}}
-echo "$PRISMA_ENDPOINT\n"
+echo "$PRISMA_ENDPOINT"
 
-read -p "What is the prisma secret? default generate random\n " PRISMA_SECRET
+read -p "What is the prisma secret[generate random]? " PRISMA_SECRET
 PRISMA_SECRET=${PRISMA_SECRET:-$(date +%s|sha256sum|base64|head -c 32)}
-echo "$PRISMA_SECRET\n"
+echo "$PRISMA_SECRET"
 
-read -p "What is the prisma management api secret? default generate random\n " PRISMA_MANAGEMENT_API_SECRET
+read -p "What is the prisma management api secret[generate random]? " PRISMA_MANAGEMENT_API_SECRET
 PRISMA_MANAGEMENT_API_SECRET=${PRISMA_MANAGEMENT_API_SECRET:-$(date +%s|sha256sum|base64|head -c 32)}
-echo "$PRISMA_MANAGEMENT_API_SECRET\n"
+echo "$PRISMA_MANAGEMENT_API_SECRET"
 
-read -p "What is the file space's enpoint? default https://nyc3.digitaloceanspaces.com\n " S3_ENDPOINT
+read -p "What is the file space's enpoint[https://nyc3.digitaloceanspaces.com]? " S3_ENDPOINT
 S3_ENDPOINT=${S3_ENDPOINT:-https://nyc3.digitaloceanspaces.com}
-echo "$S3_ENDPOINT\n"
+echo "$S3_ENDPOINT"
 
-echo "\nWhat is the file spaces bucket name? default to florestaprotegida\n"
+echo "\nWhat is the file spaces bucket name[florestaprotegida]?"
 S3_BUCKET_NAME=${S3_BUCKET_NAME:-florestaprotegida}
-read S3_BUCKET_NAME
+echo "$S3_BUCKET_NAME"
 
-echo "\nWhat is the file spaces id?\n"
+echo "\nWhat is the file spaces id?"
 read S3_AWS_ACCESS_KEY_ID
+echo "$S3_AWS_ACCESS_KEY_ID"
 
-echo "\nWhat is the file spaces secret?\n"
+echo "\nWhat is the file spaces secret?"
 read S3_AWS_SECRET_ACCESS_KEY
+echo "$S3_AWS_SECRET_ACCESS_KEY"
 
 
 DATABASE_PASSWORD=$(date +%s|sha256sum|base64|head -c 32)
@@ -106,7 +108,7 @@ PRODUCTION="true" \
 API_HOST="https://floresta-server.${HOSTDOMAIN}"
 
 
-echo "\n\nMysql password: ${PASSWORD}"
+echo "\n\nMysql password: ${DATABASE_PASSWORD}"
 echo "\n\nPrisma secret: ${PRISMA_SECRET}"
 echo "\n\nPrisma managment api secret: ${PRISMA_MANAGEMENT_API_SECRET}"
 echo "\n\nApp secret: ${APP_SECRET}"

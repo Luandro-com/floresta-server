@@ -24,6 +24,10 @@ The Prisma server is also exposed on `http://localhost:4466`
 
 ## Deploy
 
+### Dokku
+
+Easiest way to deploy is using [Dokku](https://github.com/dokku/dokku). Run `deploy/dokku.sh` on the server or simply `curl -o- -L https://tinyurl.com/y5pyuy43 | sh`
+
 ### Docker
 
 To install create a folder for the project on your server and run `curl -o- -L http://tiny.cc/6r837y | bash` inside it. Edit `mv .env.example .env` with your variables.
