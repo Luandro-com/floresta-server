@@ -2,8 +2,8 @@ port: 4466
 databases:
   default:
     connector: mysql
-    host: ${DATABASE_URL}
+    host: ${env:DATABASE_URL}
     port: 3306
     user: root
-    password: ${DATABASE_PASSWORD}
+    password: ${env:DATABASE_PASSWORD}
     migrations: true

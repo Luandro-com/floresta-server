@@ -66,8 +66,7 @@ NODE_ENV="production" \
 PRODUCTION="true" \
 DATABASE_URL="dokku-mysql-florestaprotegida-db" \
 DATABASE_PASSWORD=$DATABASE_PASSWORD \
-PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET \
-APP_SECRET=$APP_SECRET
+PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET
 
 # Run for Prisma after install.
 # https://github.com/dokku/dokku-letsencrypt#dockerfile-deploys
