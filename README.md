@@ -26,7 +26,7 @@ The Prisma server is also exposed on `http://localhost:4466`
 
 ### Dokku
 
-Easiest way to deploy is using [Dokku](https://github.com/dokku/dokku). Run `deploy/dokku.sh` on the server or simply `curl -o- -L https://tinyurl.com/y5pyuy43 | sh`
+Easiest way to deploy is using [Dokku](https://github.com/dokku/dokku). Run `deploy/dokku.sh` on the server or simply `curl -o- -L https://tinyurl.com/y5pyuy43 | sh`.
 
 ### Docker
 

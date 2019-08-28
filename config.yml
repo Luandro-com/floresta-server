@@ -2,8 +2,8 @@ port: 4466
 databases:
   default:
     connector: mysql
-    host: ${env:DATABASE_URL}
+    host: dokku-mysql-florestaprotegida-db
     port: 3306
-    user: root
+    user: florestaprotegida_db
     password: ${env:DATABASE_PASSWORD}
     migrations: true
