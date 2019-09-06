@@ -62,6 +62,7 @@ dokku docker-options:add floresta-prisma-server build '--file prisma.dockerfile'
 DATABASE_PASSWORD=$DATABASE_PASSWORD \
 
 dokku config:set floresta-prisma-server \
+DOKKU_PROXY_PORT_MAP="http:80:4466 https:443:4466" \
 NODE_ENV="production" \
 PRODUCTION="true" \
 DATABASE_URL="dokku-mysql-florestaprotegida-db" \

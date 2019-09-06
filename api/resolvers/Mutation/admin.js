@@ -66,9 +66,9 @@ const admin = {
         }
       }
       input.categories.map(c => {
-        categoriesCreateConnections.categories.create.push({
-          category: c
-        })
+        // categoriesCreateConnections.categories.create.push({
+        //   category: c
+        // })
         categoriesCreateConnections.categories.connect.push({
           category: c
         })
