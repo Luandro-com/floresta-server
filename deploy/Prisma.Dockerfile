@@ -2,8 +2,8 @@
 FROM prismagraphql/prisma:1.34.0
 
 # Tell docker there are arguments we need
-ARG DB_HOST:
-ARG DATABASE_PASSWORD:
+ARG DB_HOST
+ARG DATABASE_PASSWORD
 ARG PRISMA_MANAGEMENT_API_SECRET
 ARG PRISMA_CONFIG_PATH
 
@@ -16,8 +16,8 @@ ENV PRISMA_CONFIG_PATH prisma.yml
 COPY deploy/config.yml prisma.yml
 
 # Copy build-time environment varibles into config
-RUN sed -i s/DB_HOST:/$DB_HOST:/g prisma.yml
-RUN sed -i s/DATABASE_PASSWORD:/$DATABASE_PASSWORD:/g prisma.yml
+RUN sed -i s/DB_HOST/$DB_HOST/g prisma.yml
+RUN sed -i s/DATABASE_PASSWORD/$DATABASE_PASSWORD/g prisma.yml
 RUN sed -i s/PRISMA_MANAGEMENT_API_SECRET/$PRISMA_MANAGEMENT_API_SECRET/g prisma.yml
 
 # Exposes Prisma port to 80/443 i.e. :4466 is not needed at the end of the server URL

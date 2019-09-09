@@ -25,7 +25,7 @@ port: 4466
 databases:
     default:
         connector: mysql
-        host: DB_HOST
+        host: dokku-mysql-florestaprotegida-db
         port: 3306
         user: mysql
         password: DATABASE_PASSWORD
