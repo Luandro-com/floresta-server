@@ -1,5 +1,5 @@
 # port: 4466
-# managementApiSecret: ${env:PRISMA_MANAGEMENT_API_SECRET}
+# managementApiSecret: ${env:}
 # databases:
 #   default:
 #     connector: mysql
