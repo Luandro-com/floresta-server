@@ -10,12 +10,24 @@
 #     password: ${env:DATABASE_PASSWORD}
 #     migrations: true
 
+# port: 4466
+# databases:
+#   default:
+#     connector: postgres
+#     host: dokku-postgres-prisma-server-db
+#     port: 5432
+#     user: postgres
+#     password: 8e148681e2a980fb93a5fdb781882d1d
+#     migrations: true
+
+managementApiSecret: PRISMA_MANAGEMENT_API_SECRET
 port: 4466
 databases:
-  default:
-    connector: postgres
-    host: dokku-postgres-prisma-server-db
-    port: 5432
-    user: postgres
-    password: 8e148681e2a980fb93a5fdb781882d1d
-    migrations: true
+    default:
+        connector: mysql
+        host: DB_HOST
+        port: 3306
+        user: mysql
+        password: DATABASE_PASSWORD
+        migrations: true
+        active: true
