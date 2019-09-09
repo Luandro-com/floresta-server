@@ -1,11 +1,21 @@
+# port: 4466
+# managementApiSecret: ${env:PRISMA_MANAGEMENT_API_SECRET}
+# databases:
+#   default:
+#     connector: mysql
+#     host: dokku-mysql-florestaprotegida-db
+#     name: florestaprotegida_db
+#     port: 3306
+#     user: mysql
+#     password: ${env:DATABASE_PASSWORD}
+#     migrations: true
+
 port: 4466
-managementApiSecret: ${env:PRISMA_MANAGEMENT_API_SECRET}
 databases:
   default:
-    connector: mysql
-    host: dokku-mysql-florestaprotegida-db
-    name: florestaprotegida_db
-    port: 3306
-    user: mysql
+    connector: postgres
+    host: dokku-postgres-prisma-server-db
+    port: 5432
+    user: postgres
     password: ${env:DATABASE_PASSWORD}
     migrations: true
