@@ -17,5 +17,5 @@ databases:
     host: dokku-postgres-prisma-server-db
     port: 5432
     user: postgres
-    password: ${env:DATABASE_PASSWORD}
+    password: 8e148681e2a980fb93a5fdb781882d1d
     migrations: true
