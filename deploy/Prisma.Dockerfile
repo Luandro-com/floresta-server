@@ -13,7 +13,7 @@ ARG PRISMA_CONFIG_PATH
 ENV PRISMA_CONFIG_PATH prisma.yml
 
 # Copy over config to server
-COPY deploy/config.yml prisma.yml
+COPY ./deploy/config.yml prisma.yml
 
 # Copy build-time environment varibles into config
 RUN sed -i s/SQL_HOST/$SQL_HOST/g prisma.yml
