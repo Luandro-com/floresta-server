@@ -63,9 +63,11 @@ DATABASE_PASSWORD=$DATABASE_PASSWORD \
 
 dokku config:set floresta-prisma-server \
 DOKKU_PROXY_PORT_MAP="http:80:4466 https:443:4466" \
+DB_HOST="dokku-mysql-florestaprotegida-db" \
+DB_NAME="florestaprotegida_db" \
+DB_USER="mysql" \
 NODE_ENV="production" \
 PRODUCTION="true" \
-DATABASE_URL="dokku-mysql-florestaprotegida-db" \
 DATABASE_PASSWORD=$DATABASE_PASSWORD \
 PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET
 
