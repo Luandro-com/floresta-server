@@ -61,15 +61,20 @@ dokku docker-options:add floresta-prisma-server build '--file prisma.dockerfile'
 
 DATABASE_PASSWORD=$DATABASE_PASSWORD \
 
+dokku docker-options:add floresta-prisma-server build '--build-arg \
+  NODE_ENV=production \
+  PRODUCTION=true \
+  DB_HOST=dokku-mysql-florestaprotegida-db \
+  '
+dokku docker-options:add floresta-prisma-server build '--build-arg 'DATABASE_PASSWORD=${DATABASE_PASSWORD} \
+  PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET
+
 dokku config:set floresta-prisma-server \
 DOKKU_PROXY_PORT_MAP="http:80:4466 https:443:4466" \
 DB_HOST="dokku-mysql-florestaprotegida-db" \
-DB_NAME="florestaprotegida_db" \
-DB_USER="mysql" \
 NODE_ENV="production" \
 PRODUCTION="true" \
-DATABASE_PASSWORD=$DATABASE_PASSWORD \
-PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET
+
 
 # Run for Prisma after install.
 # https://github.com/dokku/dokku-letsencrypt#dockerfile-deploys
