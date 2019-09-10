@@ -37,6 +37,10 @@ echo "What is the file spaces secret?"
 read S3_AWS_SECRET_ACCESS_KEY
 echo "$S3_AWS_SECRET_ACCESS_KEY"
 
+echo "Updating system"
+apt-get update
+apt-get install -qq -y dokku herokuish sshcommand plugn
+echo "Installed latest Dokku"
 
 DATABASE_PASSWORD=$(date +%s|sha256sum|base64|head -c 32)
 APP_SECRET=$(date +%s|sha256sum|base64|head -c 32)
@@ -53,7 +57,7 @@ dokku buildpacks:add floresta-admin https://github.com/heroku/heroku-buildpack-n
 dokku buildpacks:add florestaprotegida https://github.com/heroku/heroku-buildpack-nodejs.git
 
 dokku letsencrypt:cron-job --add
-dokku config:set --no-restart --global DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
+dokku config:set --global DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com DOKKU_NGINX_SSL_PORT=443
 
 dokku mysql:create florestaprotegida-db -r $DATABASE_PASSWORD
 dokku mysql:backup-auth florestaprotegida-db $S3_AWS_ACCESS_KEY_ID $S3_AWS_SECRET_ACCESS_KEY
@@ -76,7 +80,7 @@ dokku docker-options:add floresta-prisma build \
 # PRODUCTION="true"
 
 dokku config:set floresta-server \
-DOKKU_PROXY_PORT_MAP="http:80:4000 https:443:4000" \
+DOKKU_PROXY_PORT_MAP="http:80:4000" \
 NODE_ENV="production" \
 PRODUCTION="true" \
 PRISMA_STAGE="production" \
@@ -90,17 +94,25 @@ S3_AWS_ACCESS_KEY_ID=$S3_AWS_ACCESS_KEY_ID
 
 
 dokku config:set floresta-admin \
-DOKKU_PROXY_PORT_MAP="http:80:3005 https:443:3005" \
+DOKKU_PROXY_PORT_MAP="http:80:3005" \
 NODE_ENV="production" \
 PRODUCTION="true" \
 API_HOST="https://floresta-server.${HOSTDOMAIN}"
 
 dokku config:set florestaprotegida \
-DOKKU_PROXY_PORT_MAP="http:80:3000 https:443:3000" \
+DOKKU_PROXY_PORT_MAP="http:80:3000" \
 NODE_ENV="production" \
 PRODUCTION="true" \
 API_HOST="https://floresta-server.${HOSTDOMAIN}"
 
+echo "Creating swap file"
+fallocate -l 1G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+cp /etc/fstab /etc/fstab.bak
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+echo "Done creating swapfile"
 
 echo "Mysql password: ${DATABASE_PASSWORD}"
 echo "Prisma secret: ${PRISMA_SECRET}"

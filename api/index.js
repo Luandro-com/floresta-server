@@ -33,7 +33,7 @@ const server = new GraphQLServer({
 
 var whitelist = [
   'https://floresta-admin.encenar.tk',
-  'https://floresta-web.encenar.tk'
+  'https://florestaprotegida.encenar.tk'
 ]
 var corsOptions = {
   origin: function (origin, callback) {
