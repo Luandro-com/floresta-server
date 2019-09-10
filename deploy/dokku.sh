@@ -21,19 +21,19 @@ read -p "What is the file space's enpoint [https://nyc3.digitaloceanspaces.com]?
 S3_ENDPOINT=${S3_ENDPOINT:-https://nyc3.digitaloceanspaces.com}
 echo "$S3_ENDPOINT"
 
-echo "\nWhat is the file spaces bucket name [florestaprotegida]?"
+echo "\nWhat is the file spaces bucket name [florestaprotegida]?" S3_BUCKET_NAME
 S3_BUCKET_NAME=${S3_BUCKET_NAME:-florestaprotegida}
 echo "$S3_BUCKET_NAME"
 
-echo "\nWhat is the file spaces bucket name for database backup [florestaprotegida-backup]?"
+echo "\nWhat is the file spaces bucket name for database backup [florestaprotegida-backup]?" BACKUP_BUCKET_NAME
 BACKUP_BUCKET_NAME=${BACKUP_BUCKET_NAME:-florestaprotegida-backup}
 echo "$BACKUP_BUCKET_NAME"
 
-echo "\nWhat is the file spaces id?"
+echo "\nWhat is the file spaces id?" S3_AWS_ACCESS_KEY_ID
 read S3_AWS_ACCESS_KEY_ID
 echo "$S3_AWS_ACCESS_KEY_ID"
 
-echo "\nWhat is the file spaces secret?"
+echo "\nWhat is the file spaces secret?" S3_AWS_SECRET_ACCESS_KEY
 read S3_AWS_SECRET_ACCESS_KEY
 echo "$S3_AWS_SECRET_ACCESS_KEY"
 
