@@ -26,7 +26,30 @@ The Prisma server is also exposed on `http://localhost:4466`
 
 ### Dokku
 
-Easiest way to deploy is using [Dokku](https://github.com/dokku/dokku). Run `deploy/dokku.sh` on the server or simply `curl -o- -L https://tinyurl.com/y5pyuy43 | sh`.
+Easiest way to deploy is using [Dokku](https://github.com/dokku/dokku). Run `deploy/dokku.sh` on the server or simply `curl -o- -L https://tinyurl.com/y5pyuy43 | sh`. Then add the remotes to each repo:
+
+```
+git remote add prisma dokku@encenar.tk:floresta-prisma
+git remote add dokku dokku@encenar.tk:floresta-server
+git remote add dokku dokku@encenar.tk:florestaprotegida
+git remote add dokku dokku@encenar.tk:floresta-admin
+```
+
+Run `git push prisma master` to deploy the Prisma server. Once deployed `ssh` into the server and run the bellow commands to fix https:
+
+```
+dokku proxy:ports-add floresta-prisma http:80:4466
+dokku letsencrypt floresta-prisma
+dokku proxy:ports-add floresta-prisma https:443:4466
+dokku proxy:ports-remove floresta-prisma http:4000:4000
+```
+
+After deploying each of the other services `ssh` into the server and add https through Lets Encrypt:
+```
+dokku letsencrypt floresta-server
+dokku letsencrypt floresta-admin
+dokku letsencrypt florestaprotegida
+```
 
 ### Docker
 
