@@ -99,11 +99,11 @@ PRODUCTION="true" \
 API_HOST="https://floresta-server.${HOSTDOMAIN}"
 
 
-echo "\n\nMysql password: ${DATABASE_PASSWORD}"
-echo "\n\nPrisma secret: ${PRISMA_SECRET}"
-echo "\n\nPrisma managment api secret: ${PRISMA_MANAGEMENT_API_SECRET}"
-echo "\n\nApp secret: ${APP_SECRET}"
-echo "\n\n\n\n Now add dokku as remote on your development machine:"
-echo "\ngit remote add dokku dokku@${HOSTDOMAIN}:service\n\n\n"
-echo "\nAnd run dokku letsencrypt for each service once deployed\n\n\n"
+echo "Mysql password: ${DATABASE_PASSWORD}"
+echo "Prisma secret: ${PRISMA_SECRET}"
+echo "Prisma managment api secret: ${PRISMA_MANAGEMENT_API_SECRET}"
+echo "App secret: ${APP_SECRET}"
+echo " Now add dokku as remote on your development machine:"
+echo "git remote add dokku dokku@${HOSTDOMAIN}:service"
+echo "And run dokku letsencrypt for each service once deployed"
 echo "Done!"
