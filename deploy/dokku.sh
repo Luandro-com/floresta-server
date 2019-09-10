@@ -55,7 +55,7 @@ dokku config:set --global DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
 # dokku config:set --no-restart floresta-admin DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
 # dokku config:set --no-restart floresta-web DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
 
-dokku mysql:create florestaprotegida-db
+dokku mysql:create florestaprotegida-db -p $DATABASE_PASSWORD
 dokku mysql:link florestaprotegida-db floresta-prisma-server
 dokku docker-options:add floresta-prisma-server build '--file prisma.dockerfile'
 
