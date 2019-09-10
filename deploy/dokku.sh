@@ -70,10 +70,10 @@ dokku docker-options:add floresta-prisma build \
   '--build-arg DATABASE_PASSWORD='$DATABASE_PASSWORD \
   '--build-arg PRISMA_MANAGEMENT_API_SECRET='$PRISMA_MANAGEMENT_API_SECRET
 
-dokku config:set floresta-prisma \
-DOKKU_PROXY_PORT_MAP="http:80:4466 https:443:4466" \
-NODE_ENV="production" \
-PRODUCTION="true"
+# dokku config:set floresta-prisma \
+# DOKKU_PROXY_PORT_MAP="http:80:4466 https:443:4466" \
+# NODE_ENV="production" \
+# PRODUCTION="true"
 
 dokku config:set floresta-server \
 DOKKU_PROXY_PORT_MAP="http:80:4000 https:443:4000" \
