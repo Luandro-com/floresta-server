@@ -62,8 +62,7 @@ dokku mysql:backup-schedule florestaprotegida-db "0 3 * * *" $BACKUP_BUCKET_NAME
 
 dokku mysql:link florestaprotegida-db floresta-prisma
 
-dokku docker-options:add floresta-prisma build '--file prisma.dockerfile'
-dokku docker-options:add floresta-prisma build '--file prisma.dockerfile --build-arg NODE_ENV=production PRODUCTION=true DB_HOST=dokku-mysql-florestaprotegida-db' \
+dokku docker-options:add floresta-prisma build '--file deploy/Prisma.Dockerfile --build-arg NODE_ENV=production PRODUCTION=true DB_HOST=dokku-mysql-florestaprotegida-db' \
   DATABASE_PASSWORD=${DATABASE_PASSWORD} \
   PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET
 
