@@ -31,7 +31,6 @@ Easiest way to deploy is using [Dokku](https://github.com/dokku/dokku). In a mac
 bash <(curl -s https://raw.githubusercontent.com/Luandro-com/floresta-server/master/deploy/dokku.sh)
 ```
 
-
 Add the remotes to each repo:
 
 ```
