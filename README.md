@@ -26,7 +26,13 @@ The Prisma server is also exposed on `http://localhost:4466`
 
 ### Dokku
 
-Easiest way to deploy is using [Dokku](https://github.com/dokku/dokku). Run `deploy/dokku.sh` on the server or simply `curl -o- -L https://tinyurl.com/y5pyuy43 | sh`. Then add the remotes to each repo:
+Easiest way to deploy is using [Dokku](https://github.com/dokku/dokku). Run `deploy/dokku.sh` on the server or simply:
+```
+bash <(curl -s https://raw.githubusercontent.com/Luandro-com/floresta-server/master/deploy/dokku.sh)
+```
+
+
+Add the remotes to each repo:
 
 ```
 git remote add prisma dokku@encenar.tk:floresta-prisma
