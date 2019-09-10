@@ -5,7 +5,7 @@ databases:
         connector: mysql
         host: DB_HOST
         port: 3306
-        user: mysql
+        user: root
         password: DATABASE_PASSWORD
         migrations: true
         active: true

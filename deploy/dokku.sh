@@ -55,16 +55,20 @@ dokku buildpacks:add florestaprotegida https://github.com/heroku/heroku-buildpac
 dokku letsencrypt:cron-job --add
 dokku config:set --no-restart --global DOKKU_LETSENCRYPT_EMAIL=terrakrya@protonmail.com
 
-dokku mysql:create florestaprotegida-db -p $DATABASE_PASSWORD
+dokku mysql:create florestaprotegida-db -r $DATABASE_PASSWORD
 dokku mysql:backup-auth florestaprotegida-db $S3_AWS_ACCESS_KEY_ID $S3_AWS_SECRET_ACCESS_KEY
 dokku mysql:backup florestaprotegida-db $BACKUP_BUCKET_NAME [-u|--use-iam-optional]
 dokku mysql:backup-schedule florestaprotegida-db "0 3 * * *" $BACKUP_BUCKET_NAME --use-iam
 
 dokku mysql:link florestaprotegida-db floresta-prisma
 
-dokku docker-options:add floresta-prisma build '--file deploy/Prisma.Dockerfile --build-arg NODE_ENV=production PRODUCTION=true DB_HOST=dokku-mysql-florestaprotegida-db' \
-  DATABASE_PASSWORD=${DATABASE_PASSWORD} \
-  PRISMA_MANAGEMENT_API_SECRET=$PRISMA_MANAGEMENT_API_SECRET
+dokku docker-options:add floresta-prisma build \
+  '--file deploy/Prisma.Dockerfile' \
+  '--build-arg NODE_ENV=production' \
+  '--build-arg PRODUCTION=true' \
+  '--build-arg DB_HOST=dokku-mysql-florestaprotegida-db' \
+  '--build-arg DATABASE_PASSWORD='$DATABASE_PASSWORD \
+  '--build-arg PRISMA_MANAGEMENT_API_SECRET='$PRISMA_MANAGEMENT_API_SECRET
 
 dokku config:set floresta-prisma \
 DOKKU_PROXY_PORT_MAP="http:80:4466 https:443:4466" \
