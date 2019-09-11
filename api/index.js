@@ -5,6 +5,7 @@ const { Prisma } = require('prisma-binding')
 // const { sentry } = require('graphql-middleware-sentry')
 // const { forward } = require('graphql-middleware-forward-binding')
 const permissions = require('./services/auth/permissions')
+const PORT = process.env.PORT || 4000
 
 const db = new Prisma({
   typeDefs: 'api/generated/prisma.graphql', // the auto-generated GraphQL schema of the Prisma API
@@ -33,7 +34,7 @@ const server = new GraphQLServer({
 
 var whitelist = [
   'https://floresta-admin.encenar.tk',
-  'https://florestaprotegida.encenar.tk'
+  'https://florestaprotegida.encenar.tk',
 ]
 var corsOptions = {
   origin: function (origin, callback) {
@@ -51,7 +52,9 @@ var corsOptions = {
 
 server.use(cors(corsOptions))
 
-server.start(() => console.log('Server is running on http://localhost:4000'))
+server.start(({
+  port: PORT
+}) => console.log(`Server is running on http://localhost:${PORT}`))
 
 /* Deploying with Now v2 */
 // module.exports = server;
