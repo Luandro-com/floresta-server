@@ -5,6 +5,8 @@ input ContentInput {
     subTitle: String
     facebookLink: String
     youtubeLink: String
+    flickrLink: String
+    instagramLink: String
     description: String
     logo: String
     mapLink: String
