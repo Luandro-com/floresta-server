@@ -6,7 +6,6 @@ const upload = {
   },
 
   async uploadFiles (parent, { files }, ctx, info) {
-    console.log('files', files)
     return Promise.all(files.map(file => processUpload(file, ctx)))
   },
 
