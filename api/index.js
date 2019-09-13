@@ -34,27 +34,27 @@ const server = new GraphQLServer({
 
 var whitelist = [
   'https://floresta-admin.encenar.tk',
-  'https://florestaprotegida.encenar.tk',
+  'https://florestaprotegida.encenar.tk'
 ]
 var corsOptions = {
   origin: function (origin, callback) {
-    if (process.env.NODE_ENV === 'production') {
-      if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true)
-      } else {
-        callback(new Error('Not allowed by CORS'))
-      }
-    } else {
-      callback(null, true)
-    }
+    // if (process.env.NODE_ENV === 'production') {
+    //   if (whitelist.indexOf(origin) !== -1) {
+    //     callback(null, true)
+    //   } else {
+    //     callback(new Error('Not allowed by CORS'))
+    //   }
+    // } else {
+    callback(null, true)
+    // }
   }
 }
 
 server.use(cors(corsOptions))
 
-server.start(({
-  port: PORT
-}) => console.log(`Server is running on http://localhost:${PORT}`))
+server.start(({ port: PORT }) =>
+  console.log(`Server is running on http://localhost:${PORT}`)
+)
 
 /* Deploying with Now v2 */
 // module.exports = server;

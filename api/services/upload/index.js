@@ -1,3 +1,4 @@
+const fs = require('fs')
 const aws = require('aws-sdk')
 const uuid = require('uuid')
 
@@ -11,46 +12,57 @@ const s3 = new aws.S3({
   endpoint: new aws.Endpoint(process.env.S3_ENDPOINT)
 })
 
-exports.processUpload = async ( upload, ctx ) => {
+exports.processUpload = async (upload, ctx) => {
   if (!upload) {
-    return console.log('ERROR: No file received.')
+    throw 'ERROR: No file received.'
   }
-  
+  console.log('Gonna upload', upload)
   const { stream, filename, mimetype, encoding } = await upload
   const key = uuid() + '-' + filename
-
   // Upload to S3
-  const response = await s3
-    .upload({
-      Key: key,
-      ACL: 'public-read',
-      Body: stream
-    }).promise()
+  // s3.upload (uploadParams, function (err, data) {
+  //   if (err) {
+  //     console.log("Error", err);
+  //   } if (data) {
+  //     console.log("Upload Success", data.Location);
+  //   }
+  // });
+  try {
+    const response = await s3
+      .upload({
+        Key: key,
+        ACL: 'public-read',
+        Body: stream
+      })
+      .promise()
 
-  const url = response.Location
+    const url = response.Location
+    // Sync with Prisma
+    const data = {
+      filename,
+      mimetype,
+      encoding,
+      url
+    }
 
-  // Sync with Prisma
-  const data = {
-    filename,
-    mimetype,
-    encoding,
-    url,
+    const { id } = await ctx.db.mutation.createFile({ data }, ` { id } `)
+
+    const file = {
+      id,
+      filename,
+      mimetype,
+      encoding,
+      url,
+      createdAt: new Date(Date.now()).toISOString(),
+      updatedAt: new Date(Date.now()).toISOString()
+    }
+
+    console.log('saved prisma file:')
+    console.log(file)
+
+    return file
+  } catch (err) {
+    console.log('Errorrrrrrrrrr', err)
+    throw err.code
   }
-
-  const { id } = await ctx.db.mutation.createFile({ data }, ` { id } `)
-
-  const file = {
-    id,
-    filename,
-    mimetype,
-    encoding,
-    url,
-    createdAt: new Date(Date.now()).toISOString(),
-    updatedAt: new Date(Date.now()).toISOString(),
-  }
-
-  console.log('saved prisma file:')
-  console.log(file)
-
-  return file
 }

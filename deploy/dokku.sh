@@ -21,7 +21,7 @@ read -p "What is the file space's enpoint [https://nyc3.digitaloceanspaces.com]?
 S3_ENDPOINT=${S3_ENDPOINT:-https://nyc3.digitaloceanspaces.com}
 echo "$S3_ENDPOINT"
 
-read -p "What is the file spaces bucket name [florestaprotegida]?" S3_BUCKET_NAME
+read -p "What is the file spaces bucket name [terrakryadev]?" S3_BUCKET_NAME
 S3_BUCKET_NAME=${S3_BUCKET_NAME:-florestaprotegida}
 echo "$S3_BUCKET_NAME"
 
