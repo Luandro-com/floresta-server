@@ -1,6 +1,6 @@
 input ContentInput {
     id: String
-    headerImage: String
+    headerImages: [String]
     title: String
     subTitle: String
     facebookLink: String

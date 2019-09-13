@@ -1,8 +1,8 @@
-const { getUserId } = require("../../services/auth/utils")
-const slugify = require("@sindresorhus/slugify")
+const { getUserId } = require('../../services/auth/utils')
+const slugify = require('@sindresorhus/slugify')
 
 const admin = {
-  async updateUserRole(parent, { userId, role }, ctx, info) {
+  async updateUserRole (parent, { userId, role }, ctx, info) {
     return await ctx.db.mutation.updateUser(
       {
         data: { role },
@@ -11,7 +11,7 @@ const admin = {
       info
     )
   },
-  async saveProject(parent, { input }, ctx, info) {
+  async saveProject (parent, { input }, ctx, info) {
     // console.log('INPUTTTTT', input);
     if (input.name && !input.slug) {
       input.slug = slugify(input.name)
@@ -19,7 +19,7 @@ const admin = {
     let cleanInput = {}
     if (input.id) {
       Object.keys(input).map(i => {
-        if (i !== "id") Object.assign(cleanInput, { [i]: input[i] })
+        if (i !== 'id') Object.assign(cleanInput, { [i]: input[i] })
       })
     }
     let connections = {}
@@ -95,52 +95,52 @@ const admin = {
     }
     return await ctx.db.mutation.upsertProject(formatedInput, info)
   },
-  async saveCategory(parent, { input }, ctx, info) {
+  async saveCategory (parent, { input }, ctx, info) {
     if (input.name && !input.slug) {
       input.slug = slugify(input.name)
     }
     const cleanInput = {}
     if (input.category) {
       Object.keys(input).map(i => {
-        if (i !== "category") Object.assign(cleanInput, { [i]: input[i] })
+        if (i !== 'category') Object.assign(cleanInput, { [i]: input[i] })
       })
     }
     return await ctx.db.mutation.upsertCategory(
       {
         update: cleanInput,
-        where: { category: input.category || "" },
+        where: { category: input.category || '' },
         create: input
       },
       info
     )
   },
-  async saveProjectTag(parent, { input }, ctx, info) {
+  async saveProjectTag (parent, { input }, ctx, info) {
     if (input.name && !input.slug) {
       input.slug = slugify(input.name)
     }
     const cleanInput = {}
     if (input.id) {
       Object.keys(input).map(i => {
-        if (i !== "id") Object.assign(cleanInput, { [i]: input[i] })
+        if (i !== 'id') Object.assign(cleanInput, { [i]: input[i] })
       })
     }
     return await ctx.db.mutation.upsertProjectTag(
       {
         update: cleanInput,
-        where: { id: input.id || "" },
+        where: { id: input.id || '' },
         create: input
       },
       info
     )
   },
-  async saveVillage(parent, { input }, ctx, info) {
+  async saveVillage (parent, { input }, ctx, info) {
     if (input.name && !input.slug) {
       input.slug = slugify(input.name)
     }
     const cleanInput = {}
     if (input.id) {
       Object.keys(input).map(i => {
-        if (i !== "id") Object.assign(cleanInput, { [i]: input[i] })
+        if (i !== 'id') Object.assign(cleanInput, { [i]: input[i] })
       })
     }
     if (input.photos) {
@@ -153,18 +153,17 @@ const admin = {
     return await ctx.db.mutation.upsertVillage(
       {
         update: cleanInput,
-        where: { id: input.id || "" },
+        where: { id: input.id || '' },
         create: cleanInput
       },
       info
     )
   },
-  async saveNews(parent, { input }, ctx, info) {
+  async saveNews (parent, { input }, ctx, info) {
     console.log()
     let cleanInput = {}
     Object.keys(input).map(i => {
-      if (i !== "id" && i !== "post")
-        Object.assign(cleanInput, { [i]: input[i] })
+      if (i !== 'id' && i !== 'post') { Object.assign(cleanInput, { [i]: input[i] }) }
     })
     if (input.post) {
       const postUpdate = {
@@ -194,7 +193,7 @@ const admin = {
       return await ctx.db.mutation.upsertNews(
         {
           update: { ...cleanInput, ...postUpdate },
-          where: { id: input.id || "" },
+          where: { id: input.id || '' },
           create: { ...cleanInput, ...postCreate }
         },
         info
@@ -203,43 +202,50 @@ const admin = {
       return await ctx.db.mutation.upsertNews(
         {
           update: cleanInput,
-          where: { id: input.id || "" },
+          where: { id: input.id || '' },
           create: input
         },
         info
       )
     }
   },
-  async removeProject(parent, { id }, ctx, info) {
+  async removeProject (parent, { id }, ctx, info) {
     const res = await ctx.db.mutation.deleteProject({
       where: { id },
       data: { variants: { disconnect: true } }
     })
-    console.log("ID", res.id)
+    console.log('ID', res.id)
     return res.id
   },
-  async removeProjectTag(parent, { id }, ctx, info) {
+  async removeProjectTag (parent, { id }, ctx, info) {
     const res = await ctx.db.mutation.deleteProjectTag({ where: { id } })
-    console.log("ID", res.id)
+    console.log('ID', res.id)
     return res.id
   },
-  async removeVillage(parent, { id }, ctx, info) {
+  async removeVillage (parent, { id }, ctx, info) {
     const res = await ctx.db.mutation.deleteVillage({ where: { id } })
-    console.log("ID", res.id)
+    console.log('ID', res.id)
     return res.id
   },
-  async removeNews(parent, { id }, ctx, info) {
+  async removeNews (parent, { id }, ctx, info) {
     const res = await ctx.db.mutation.deleteNews({ where: { id } })
-    console.log("ID", res.id)
+    console.log('ID', res.id)
     return res.id
   },
-  async updateContent(parent, { input }, ctx, info) {
+  async updateContent (parent, { input }, ctx, info) {
+    console.log(' input', input)
     const where = input.id
       ? { id: input.id }
-      : { createdAt_not: "1900-01-01T00:00:00.263Z" }
-    const goodValues = {}
+      : { createdAt_not: '1900-01-01T00:00:00.263Z' }
+    let goodValues = {}
     Object.keys(input).map(key => {
-      if (key !== "id") {
+      if (key === 'headerImages') {
+        return Object.assign(goodValues, {
+          [key]: {
+            set: input[key]
+          }
+        })
+      } else if (key !== 'id') {
         return Object.assign(goodValues, { [key]: input[key] })
       }
     })
@@ -254,7 +260,7 @@ const admin = {
       const contents = await ctx.db.query.contents({}, info)
       return contents[0]
     } else {
-      throw "Error on updating content."
+      throw 'Error on updating content.'
     }
   }
 }

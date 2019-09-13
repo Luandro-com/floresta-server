@@ -54,7 +54,7 @@ type Content {
   id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  headerImage: String
+  headerImages: [String] @scalarList(strategy: RELATION)
   title: String
   subTitle: String
   logo: String

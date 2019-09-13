@@ -1,5 +1,5 @@
-# source: https://floresta-prisma.encenar.tk
-# timestamp: Thu Sep 12 2019 16:55:48 GMT-0300 (GMT-03:00)
+# source: http://localhost:4466
+# timestamp: Thu Sep 12 2019 18:11:09 GMT-0300 (GMT-03:00)
 
 type AggregateCategory {
   count: Int!
@@ -994,7 +994,7 @@ type Content implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  headerImage: String
+  headerImages: [String!]!
   title: String
   subTitle: String
   logo: String
@@ -1020,9 +1020,12 @@ type ContentConnection {
   aggregate: AggregateContent!
 }
 
+input ContentCreateheaderImagesInput {
+  set: [String!]
+}
+
 input ContentCreateInput {
   id: ID
-  headerImage: String
   title: String
   subTitle: String
   logo: String
@@ -1034,6 +1037,7 @@ input ContentCreateInput {
   facebookLink: String
   flickrLink: String
   instagramLink: String
+  headerImages: ContentCreateheaderImagesInput
   categories: CategoryCreateManyInput
   villages: VillageCreateManyWithoutContentInput
 }
@@ -1045,7 +1049,6 @@ input ContentCreateManyWithoutVillagesInput {
 
 input ContentCreateWithoutVillagesInput {
   id: ID
-  headerImage: String
   title: String
   subTitle: String
   logo: String
@@ -1057,6 +1060,7 @@ input ContentCreateWithoutVillagesInput {
   facebookLink: String
   flickrLink: String
   instagramLink: String
+  headerImages: ContentCreateheaderImagesInput
   categories: CategoryCreateManyInput
 }
 
@@ -1076,8 +1080,6 @@ enum ContentOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  headerImage_ASC
-  headerImage_DESC
   title_ASC
   title_DESC
   subTitle_ASC
@@ -1106,7 +1108,7 @@ type ContentPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  headerImage: String
+  headerImages: [String!]!
   title: String
   subTitle: String
   logo: String
@@ -1213,46 +1215,6 @@ input ContentScalarWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  headerImage: String
-
-  """All values that are not equal to given value."""
-  headerImage_not: String
-
-  """All values that are contained in given list."""
-  headerImage_in: [String!]
-
-  """All values that are not contained in given list."""
-  headerImage_not_in: [String!]
-
-  """All values less than the given value."""
-  headerImage_lt: String
-
-  """All values less than or equal the given value."""
-  headerImage_lte: String
-
-  """All values greater than the given value."""
-  headerImage_gt: String
-
-  """All values greater than or equal the given value."""
-  headerImage_gte: String
-
-  """All values containing the given string."""
-  headerImage_contains: String
-
-  """All values not containing the given string."""
-  headerImage_not_contains: String
-
-  """All values starting with the given string."""
-  headerImage_starts_with: String
-
-  """All values not starting with the given string."""
-  headerImage_not_starts_with: String
-
-  """All values ending with the given string."""
-  headerImage_ends_with: String
-
-  """All values not ending with the given string."""
-  headerImage_not_ends_with: String
   title: String
 
   """All values that are not equal to given value."""
@@ -1732,8 +1694,11 @@ input ContentSubscriptionWhereInput {
   node: ContentWhereInput
 }
 
+input ContentUpdateheaderImagesInput {
+  set: [String!]
+}
+
 input ContentUpdateInput {
-  headerImage: String
   title: String
   subTitle: String
   logo: String
@@ -1745,12 +1710,12 @@ input ContentUpdateInput {
   facebookLink: String
   flickrLink: String
   instagramLink: String
+  headerImages: ContentUpdateheaderImagesInput
   categories: CategoryUpdateManyInput
   villages: VillageUpdateManyWithoutContentInput
 }
 
 input ContentUpdateManyDataInput {
-  headerImage: String
   title: String
   subTitle: String
   logo: String
@@ -1762,10 +1727,10 @@ input ContentUpdateManyDataInput {
   facebookLink: String
   flickrLink: String
   instagramLink: String
+  headerImages: ContentUpdateheaderImagesInput
 }
 
 input ContentUpdateManyMutationInput {
-  headerImage: String
   title: String
   subTitle: String
   logo: String
@@ -1777,6 +1742,7 @@ input ContentUpdateManyMutationInput {
   facebookLink: String
   flickrLink: String
   instagramLink: String
+  headerImages: ContentUpdateheaderImagesInput
 }
 
 input ContentUpdateManyWithoutVillagesInput {
@@ -1797,7 +1763,6 @@ input ContentUpdateManyWithWhereNestedInput {
 }
 
 input ContentUpdateWithoutVillagesDataInput {
-  headerImage: String
   title: String
   subTitle: String
   logo: String
@@ -1809,6 +1774,7 @@ input ContentUpdateWithoutVillagesDataInput {
   facebookLink: String
   flickrLink: String
   instagramLink: String
+  headerImages: ContentUpdateheaderImagesInput
   categories: CategoryUpdateManyInput
 }
 
@@ -1916,46 +1882,6 @@ input ContentWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  headerImage: String
-
-  """All values that are not equal to given value."""
-  headerImage_not: String
-
-  """All values that are contained in given list."""
-  headerImage_in: [String!]
-
-  """All values that are not contained in given list."""
-  headerImage_not_in: [String!]
-
-  """All values less than the given value."""
-  headerImage_lt: String
-
-  """All values less than or equal the given value."""
-  headerImage_lte: String
-
-  """All values greater than the given value."""
-  headerImage_gt: String
-
-  """All values greater than or equal the given value."""
-  headerImage_gte: String
-
-  """All values containing the given string."""
-  headerImage_contains: String
-
-  """All values not containing the given string."""
-  headerImage_not_contains: String
-
-  """All values starting with the given string."""
-  headerImage_starts_with: String
-
-  """All values not starting with the given string."""
-  headerImage_not_starts_with: String
-
-  """All values ending with the given string."""
-  headerImage_ends_with: String
-
-  """All values not ending with the given string."""
-  headerImage_not_ends_with: String
   title: String
 
   """All values that are not equal to given value."""
@@ -2785,6 +2711,9 @@ input FileWhereUniqueInput {
   url: String
 }
 
+"""Raw JSON value"""
+scalar Json
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -2858,6 +2787,7 @@ type Mutation {
   deleteManyResetPasswordRequests(where: ResetPasswordRequestWhereInput): BatchPayload!
   deleteManyFiles(where: FileWhereInput): BatchPayload!
   deleteManyCategories(where: CategoryWhereInput): BatchPayload!
+  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -4213,6 +4143,10 @@ input PostWhereInput {
 input PostWhereUniqueInput {
   id: ID
   slug: String
+}
+
+enum PrismaDatabase {
+  default
 }
 
 type Project implements Node {
