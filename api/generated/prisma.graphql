@@ -1,5 +1,5 @@
-# source: http://localhost:4466
-# timestamp: Thu Sep 12 2019 18:11:09 GMT-0300 (GMT-03:00)
+# source: https://floresta-prisma.encenar.tk
+# timestamp: Fri Sep 13 2019 08:45:54 GMT-0300 (GMT-03:00)
 
 type AggregateCategory {
   count: Int!
@@ -2711,9 +2711,6 @@ input FileWhereUniqueInput {
   url: String
 }
 
-"""Raw JSON value"""
-scalar Json
-
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -2787,7 +2784,6 @@ type Mutation {
   deleteManyResetPasswordRequests(where: ResetPasswordRequestWhereInput): BatchPayload!
   deleteManyFiles(where: FileWhereInput): BatchPayload!
   deleteManyCategories(where: CategoryWhereInput): BatchPayload!
-  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -4143,10 +4139,6 @@ input PostWhereInput {
 input PostWhereUniqueInput {
   id: ID
   slug: String
-}
-
-enum PrismaDatabase {
-  default
 }
 
 type Project implements Node {
