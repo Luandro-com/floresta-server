@@ -128,6 +128,7 @@ type ProjectTag {
 type News {
   id: ID! @id
   intro: String
+  tags: [ProjectTag]
   description: String
   link: String
   post: Post

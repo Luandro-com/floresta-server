@@ -48,4 +48,5 @@ input NewsInput {
   post: Boolean
   title: String
   media: String
+  tags: [String]
 }

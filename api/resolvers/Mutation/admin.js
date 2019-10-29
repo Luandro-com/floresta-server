@@ -160,11 +160,30 @@ const admin = {
     )
   },
   async saveNews (parent, { input }, ctx, info) {
-    console.log()
     let cleanInput = {}
     Object.keys(input).map(i => {
-      if (i !== 'id' && i !== 'post') { Object.assign(cleanInput, { [i]: input[i] }) }
+      if (i !== 'id' && i !== 'post') {
+        Object.assign(cleanInput, { [i]: input[i] })
+      }
     })
+    let tagsCreateConnections = {}
+    let tagsUpdateConnections = {}
+    if (input.tags) {
+      Object.assign(tagsUpdateConnections, {
+        tags: {
+          set: input.tags.map(t => {
+            return { id: t }
+          })
+        }
+      })
+      Object.assign(tagsCreateConnections, {
+        tags: {
+          connect: input.tags.map(t => {
+            return { id: t }
+          })
+        }
+      })
+    }
     if (input.post) {
       const postUpdate = {
         post: {
@@ -192,18 +211,18 @@ const admin = {
       console.log({ ...cleanInput, ...postCreate })
       return await ctx.db.mutation.upsertNews(
         {
-          update: { ...cleanInput, ...postUpdate },
+          update: { ...cleanInput, ...postUpdate, ...tagsUpdateConnections },
           where: { id: input.id || '' },
-          create: { ...cleanInput, ...postCreate }
+          create: { ...cleanInput, ...postCreate, ...tagsCreateConnections }
         },
         info
       )
     } else {
       return await ctx.db.mutation.upsertNews(
         {
-          update: cleanInput,
+          update: { ...cleanInput, ...tagsUpdateConnections },
           where: { id: input.id || '' },
-          create: input
+          create: { ...input, ...tagsCreateConnections }
         },
         info
       )

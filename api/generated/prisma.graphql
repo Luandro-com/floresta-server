@@ -1,5 +1,5 @@
-# source: https://floresta-prisma.encenar.tk
-# timestamp: Fri Sep 13 2019 08:45:54 GMT-0300 (GMT-03:00)
+# source: http://localhost:4466
+# timestamp: Wed Oct 23 2019 15:58:02 GMT-0300 (GMT-03:00)
 
 type AggregateCategory {
   count: Int!
@@ -2711,6 +2711,9 @@ input FileWhereUniqueInput {
   url: String
 }
 
+"""Raw JSON value"""
+scalar Json
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -2723,67 +2726,68 @@ type Mutation {
   createContent(data: ContentCreateInput!): Content!
   createVillage(data: VillageCreateInput!): Village!
   createProject(data: ProjectCreateInput!): Project!
-  createProjectTag(data: ProjectTagCreateInput!): ProjectTag!
   createNews(data: NewsCreateInput!): News!
   createNewsletterSubscription(data: NewsletterSubscriptionCreateInput!): NewsletterSubscription!
   createResetPasswordRequest(data: ResetPasswordRequestCreateInput!): ResetPasswordRequest!
   createFile(data: FileCreateInput!): File!
+  createProjectTag(data: ProjectTagCreateInput!): ProjectTag!
   createCategory(data: CategoryCreateInput!): Category!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateContent(data: ContentUpdateInput!, where: ContentWhereUniqueInput!): Content
   updateVillage(data: VillageUpdateInput!, where: VillageWhereUniqueInput!): Village
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
-  updateProjectTag(data: ProjectTagUpdateInput!, where: ProjectTagWhereUniqueInput!): ProjectTag
   updateNews(data: NewsUpdateInput!, where: NewsWhereUniqueInput!): News
   updateNewsletterSubscription(data: NewsletterSubscriptionUpdateInput!, where: NewsletterSubscriptionWhereUniqueInput!): NewsletterSubscription
   updateResetPasswordRequest(data: ResetPasswordRequestUpdateInput!, where: ResetPasswordRequestWhereUniqueInput!): ResetPasswordRequest
   updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
+  updateProjectTag(data: ProjectTagUpdateInput!, where: ProjectTagWhereUniqueInput!): ProjectTag
   updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
   deletePost(where: PostWhereUniqueInput!): Post
   deleteUser(where: UserWhereUniqueInput!): User
   deleteContent(where: ContentWhereUniqueInput!): Content
   deleteVillage(where: VillageWhereUniqueInput!): Village
   deleteProject(where: ProjectWhereUniqueInput!): Project
-  deleteProjectTag(where: ProjectTagWhereUniqueInput!): ProjectTag
   deleteNews(where: NewsWhereUniqueInput!): News
   deleteNewsletterSubscription(where: NewsletterSubscriptionWhereUniqueInput!): NewsletterSubscription
   deleteResetPasswordRequest(where: ResetPasswordRequestWhereUniqueInput!): ResetPasswordRequest
   deleteFile(where: FileWhereUniqueInput!): File
+  deleteProjectTag(where: ProjectTagWhereUniqueInput!): ProjectTag
   deleteCategory(where: CategoryWhereUniqueInput!): Category
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertContent(where: ContentWhereUniqueInput!, create: ContentCreateInput!, update: ContentUpdateInput!): Content!
   upsertVillage(where: VillageWhereUniqueInput!, create: VillageCreateInput!, update: VillageUpdateInput!): Village!
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
-  upsertProjectTag(where: ProjectTagWhereUniqueInput!, create: ProjectTagCreateInput!, update: ProjectTagUpdateInput!): ProjectTag!
   upsertNews(where: NewsWhereUniqueInput!, create: NewsCreateInput!, update: NewsUpdateInput!): News!
   upsertNewsletterSubscription(where: NewsletterSubscriptionWhereUniqueInput!, create: NewsletterSubscriptionCreateInput!, update: NewsletterSubscriptionUpdateInput!): NewsletterSubscription!
   upsertResetPasswordRequest(where: ResetPasswordRequestWhereUniqueInput!, create: ResetPasswordRequestCreateInput!, update: ResetPasswordRequestUpdateInput!): ResetPasswordRequest!
   upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
+  upsertProjectTag(where: ProjectTagWhereUniqueInput!, create: ProjectTagCreateInput!, update: ProjectTagUpdateInput!): ProjectTag!
   upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
   updateManyPosts(data: PostUpdateManyMutationInput!, where: PostWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyContents(data: ContentUpdateManyMutationInput!, where: ContentWhereInput): BatchPayload!
   updateManyVillages(data: VillageUpdateManyMutationInput!, where: VillageWhereInput): BatchPayload!
   updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
-  updateManyProjectTags(data: ProjectTagUpdateManyMutationInput!, where: ProjectTagWhereInput): BatchPayload!
   updateManyNewses(data: NewsUpdateManyMutationInput!, where: NewsWhereInput): BatchPayload!
   updateManyNewsletterSubscriptions(data: NewsletterSubscriptionUpdateManyMutationInput!, where: NewsletterSubscriptionWhereInput): BatchPayload!
   updateManyResetPasswordRequests(data: ResetPasswordRequestUpdateManyMutationInput!, where: ResetPasswordRequestWhereInput): BatchPayload!
   updateManyFiles(data: FileUpdateManyMutationInput!, where: FileWhereInput): BatchPayload!
+  updateManyProjectTags(data: ProjectTagUpdateManyMutationInput!, where: ProjectTagWhereInput): BatchPayload!
   updateManyCategories(data: CategoryUpdateManyMutationInput!, where: CategoryWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyContents(where: ContentWhereInput): BatchPayload!
   deleteManyVillages(where: VillageWhereInput): BatchPayload!
   deleteManyProjects(where: ProjectWhereInput): BatchPayload!
-  deleteManyProjectTags(where: ProjectTagWhereInput): BatchPayload!
   deleteManyNewses(where: NewsWhereInput): BatchPayload!
   deleteManyNewsletterSubscriptions(where: NewsletterSubscriptionWhereInput): BatchPayload!
   deleteManyResetPasswordRequests(where: ResetPasswordRequestWhereInput): BatchPayload!
   deleteManyFiles(where: FileWhereInput): BatchPayload!
+  deleteManyProjectTags(where: ProjectTagWhereInput): BatchPayload!
   deleteManyCategories(where: CategoryWhereInput): BatchPayload!
+  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -2795,6 +2799,7 @@ enum MutationType {
 type News implements Node {
   id: ID!
   intro: String
+  tags(where: ProjectTagWhereInput, orderBy: ProjectTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProjectTag!]
   description: String
   link: String
   post: Post
@@ -2821,6 +2826,7 @@ input NewsCreateInput {
   link: String
   title: String
   media: String
+  tags: ProjectTagCreateManyInput
   post: PostCreateOneWithoutNewsInput
 }
 
@@ -2836,6 +2842,7 @@ input NewsCreateWithoutPostInput {
   link: String
   title: String
   media: String
+  tags: ProjectTagCreateManyInput
 }
 
 """An edge in a connection."""
@@ -3128,6 +3135,7 @@ input NewsUpdateInput {
   link: String
   title: String
   media: String
+  tags: ProjectTagUpdateManyInput
   post: PostUpdateOneWithoutNewsInput
 }
 
@@ -3154,6 +3162,7 @@ input NewsUpdateWithoutPostDataInput {
   link: String
   title: String
   media: String
+  tags: ProjectTagUpdateManyInput
 }
 
 input NewsUpsertWithoutPostInput {
@@ -3454,6 +3463,9 @@ input NewsWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  tags_every: ProjectTagWhereInput
+  tags_some: ProjectTagWhereInput
+  tags_none: ProjectTagWhereInput
   post: PostWhereInput
 }
 
@@ -4141,6 +4153,10 @@ input PostWhereUniqueInput {
   slug: String
 }
 
+enum PrismaDatabase {
+  default
+}
+
 type Project implements Node {
   id: ID!
   createdAt: DateTime!
@@ -4626,6 +4642,11 @@ input ProjectTagCreateInput {
   projects: ProjectCreateManyWithoutTagsInput
 }
 
+input ProjectTagCreateManyInput {
+  create: [ProjectTagCreateInput!]
+  connect: [ProjectTagWhereUniqueInput!]
+}
+
 input ProjectTagCreateManyWithoutProjectsInput {
   create: [ProjectTagCreateWithoutProjectsInput!]
   connect: [ProjectTagWhereUniqueInput!]
@@ -5017,6 +5038,16 @@ input ProjectTagSubscriptionWhereInput {
   node: ProjectTagWhereInput
 }
 
+input ProjectTagUpdateDataInput {
+  name: String
+  slug: String
+  media: String
+  intro: String
+  description: String
+  photos: ProjectTagUpdatephotosInput
+  projects: ProjectUpdateManyWithoutTagsInput
+}
+
 input ProjectTagUpdateInput {
   name: String
   slug: String
@@ -5034,6 +5065,18 @@ input ProjectTagUpdateManyDataInput {
   intro: String
   description: String
   photos: ProjectTagUpdatephotosInput
+}
+
+input ProjectTagUpdateManyInput {
+  create: [ProjectTagCreateInput!]
+  connect: [ProjectTagWhereUniqueInput!]
+  set: [ProjectTagWhereUniqueInput!]
+  disconnect: [ProjectTagWhereUniqueInput!]
+  delete: [ProjectTagWhereUniqueInput!]
+  update: [ProjectTagUpdateWithWhereUniqueNestedInput!]
+  updateMany: [ProjectTagUpdateManyWithWhereNestedInput!]
+  deleteMany: [ProjectTagScalarWhereInput!]
+  upsert: [ProjectTagUpsertWithWhereUniqueNestedInput!]
 }
 
 input ProjectTagUpdateManyMutationInput {
@@ -5075,9 +5118,20 @@ input ProjectTagUpdateWithoutProjectsDataInput {
   photos: ProjectTagUpdatephotosInput
 }
 
+input ProjectTagUpdateWithWhereUniqueNestedInput {
+  where: ProjectTagWhereUniqueInput!
+  data: ProjectTagUpdateDataInput!
+}
+
 input ProjectTagUpdateWithWhereUniqueWithoutProjectsInput {
   where: ProjectTagWhereUniqueInput!
   data: ProjectTagUpdateWithoutProjectsDataInput!
+}
+
+input ProjectTagUpsertWithWhereUniqueNestedInput {
+  where: ProjectTagWhereUniqueInput!
+  update: ProjectTagUpdateDataInput!
+  create: ProjectTagCreateInput!
 }
 
 input ProjectTagUpsertWithWhereUniqueWithoutProjectsInput {
@@ -5805,33 +5859,33 @@ type Query {
   contents(where: ContentWhereInput, orderBy: ContentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Content]!
   villages(where: VillageWhereInput, orderBy: VillageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Village]!
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
-  projectTags(where: ProjectTagWhereInput, orderBy: ProjectTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProjectTag]!
   newses(where: NewsWhereInput, orderBy: NewsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [News]!
   newsletterSubscriptions(where: NewsletterSubscriptionWhereInput, orderBy: NewsletterSubscriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NewsletterSubscription]!
   resetPasswordRequests(where: ResetPasswordRequestWhereInput, orderBy: ResetPasswordRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ResetPasswordRequest]!
   files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
+  projectTags(where: ProjectTagWhereInput, orderBy: ProjectTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProjectTag]!
   categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
   post(where: PostWhereUniqueInput!): Post
   user(where: UserWhereUniqueInput!): User
   content(where: ContentWhereUniqueInput!): Content
   village(where: VillageWhereUniqueInput!): Village
   project(where: ProjectWhereUniqueInput!): Project
-  projectTag(where: ProjectTagWhereUniqueInput!): ProjectTag
   news(where: NewsWhereUniqueInput!): News
   newsletterSubscription(where: NewsletterSubscriptionWhereUniqueInput!): NewsletterSubscription
   resetPasswordRequest(where: ResetPasswordRequestWhereUniqueInput!): ResetPasswordRequest
   file(where: FileWhereUniqueInput!): File
+  projectTag(where: ProjectTagWhereUniqueInput!): ProjectTag
   category(where: CategoryWhereUniqueInput!): Category
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   contentsConnection(where: ContentWhereInput, orderBy: ContentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ContentConnection!
   villagesConnection(where: VillageWhereInput, orderBy: VillageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VillageConnection!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
-  projectTagsConnection(where: ProjectTagWhereInput, orderBy: ProjectTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectTagConnection!
   newsesConnection(where: NewsWhereInput, orderBy: NewsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NewsConnection!
   newsletterSubscriptionsConnection(where: NewsletterSubscriptionWhereInput, orderBy: NewsletterSubscriptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NewsletterSubscriptionConnection!
   resetPasswordRequestsConnection(where: ResetPasswordRequestWhereInput, orderBy: ResetPasswordRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ResetPasswordRequestConnection!
   filesConnection(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
+  projectTagsConnection(where: ProjectTagWhereInput, orderBy: ProjectTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectTagConnection!
   categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
 
   """Fetches an object given its ID"""
@@ -6145,11 +6199,11 @@ type Subscription {
   content(where: ContentSubscriptionWhereInput): ContentSubscriptionPayload
   village(where: VillageSubscriptionWhereInput): VillageSubscriptionPayload
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
-  projectTag(where: ProjectTagSubscriptionWhereInput): ProjectTagSubscriptionPayload
   news(where: NewsSubscriptionWhereInput): NewsSubscriptionPayload
   newsletterSubscription(where: NewsletterSubscriptionSubscriptionWhereInput): NewsletterSubscriptionSubscriptionPayload
   resetPasswordRequest(where: ResetPasswordRequestSubscriptionWhereInput): ResetPasswordRequestSubscriptionPayload
   file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
+  projectTag(where: ProjectTagSubscriptionWhereInput): ProjectTagSubscriptionPayload
   category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
 }
 
