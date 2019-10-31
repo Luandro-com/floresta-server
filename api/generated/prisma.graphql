@@ -1,5 +1,5 @@
-# source: https://floresta-prisma.encenar.tk
-# timestamp: Mon Oct 28 2019 21:43:36 GMT-0300 (GMT-03:00)
+# source: http://localhost:4466
+# timestamp: Thu Oct 31 2019 17:00:30 GMT-0300 (GMT-03:00)
 
 type AggregateCategory {
   count: Int!
@@ -1004,6 +1004,7 @@ type Content implements Node {
   categoriesHtml: String
   categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
   villages(where: VillageWhereInput, orderBy: VillageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Village!]
+  email: String
   youtubeLink: String
   facebookLink: String
   flickrLink: String
@@ -1033,6 +1034,7 @@ input ContentCreateInput {
   villageHtml: String
   projectsHtml: String
   categoriesHtml: String
+  email: String
   youtubeLink: String
   facebookLink: String
   flickrLink: String
@@ -1056,6 +1058,7 @@ input ContentCreateWithoutVillagesInput {
   villageHtml: String
   projectsHtml: String
   categoriesHtml: String
+  email: String
   youtubeLink: String
   facebookLink: String
   flickrLink: String
@@ -1094,6 +1097,8 @@ enum ContentOrderByInput {
   projectsHtml_DESC
   categoriesHtml_ASC
   categoriesHtml_DESC
+  email_ASC
+  email_DESC
   youtubeLink_ASC
   youtubeLink_DESC
   facebookLink_ASC
@@ -1116,6 +1121,7 @@ type ContentPreviousValues {
   villageHtml: String
   projectsHtml: String
   categoriesHtml: String
+  email: String
   youtubeLink: String
   facebookLink: String
   flickrLink: String
@@ -1495,6 +1501,46 @@ input ContentScalarWhereInput {
 
   """All values not ending with the given string."""
   categoriesHtml_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
   youtubeLink: String
 
   """All values that are not equal to given value."""
@@ -1706,6 +1752,7 @@ input ContentUpdateInput {
   villageHtml: String
   projectsHtml: String
   categoriesHtml: String
+  email: String
   youtubeLink: String
   facebookLink: String
   flickrLink: String
@@ -1723,6 +1770,7 @@ input ContentUpdateManyDataInput {
   villageHtml: String
   projectsHtml: String
   categoriesHtml: String
+  email: String
   youtubeLink: String
   facebookLink: String
   flickrLink: String
@@ -1738,6 +1786,7 @@ input ContentUpdateManyMutationInput {
   villageHtml: String
   projectsHtml: String
   categoriesHtml: String
+  email: String
   youtubeLink: String
   facebookLink: String
   flickrLink: String
@@ -1770,6 +1819,7 @@ input ContentUpdateWithoutVillagesDataInput {
   villageHtml: String
   projectsHtml: String
   categoriesHtml: String
+  email: String
   youtubeLink: String
   facebookLink: String
   flickrLink: String
@@ -2162,6 +2212,46 @@ input ContentWhereInput {
 
   """All values not ending with the given string."""
   categoriesHtml_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
   youtubeLink: String
 
   """All values that are not equal to given value."""
@@ -2711,6 +2801,9 @@ input FileWhereUniqueInput {
   url: String
 }
 
+"""Raw JSON value"""
+scalar Json
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -2784,6 +2877,7 @@ type Mutation {
   deleteManyFiles(where: FileWhereInput): BatchPayload!
   deleteManyProjectTags(where: ProjectTagWhereInput): BatchPayload!
   deleteManyCategories(where: CategoryWhereInput): BatchPayload!
+  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -4147,6 +4241,10 @@ input PostWhereInput {
 input PostWhereUniqueInput {
   id: ID
   slug: String
+}
+
+enum PrismaDatabase {
+  default
 }
 
 type Project implements Node {

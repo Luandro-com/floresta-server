@@ -10,6 +10,7 @@ input ContentInput {
     description: String
     logo: String
     mapLink: String
+    email: String
     aboutHtml: String
     villageHtml: String
     projectsHtml: String

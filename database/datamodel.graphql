@@ -64,6 +64,7 @@ type Content {
   categoriesHtml: String
   categories: [Category]
   villages: [Village]
+  email: String
   youtubeLink: String
   facebookLink: String
   flickrLink: String
