@@ -58,7 +58,7 @@ dokku letsencrypt florestaprotegida
 
 ### Docker
 
-To install create a folder for the project on your server and run `curl -o- -L http://tiny.cc/6r837y | bash` inside it. Edit `mv .env.example .env` with your variables.
+To install create a folder for the project on your server and run `curl -o- -L http://tiny.cc/6r837y | bash` inside it. Edit `mv example.env .env` with your variables.
 
 If you don't have [spaces](https://www.digitalocean.com/docs/spaces/) or [s3](https://aws.amazon.com/s3/) you can run a self hosted [minio](https://min.io/) server like this:
 ```
