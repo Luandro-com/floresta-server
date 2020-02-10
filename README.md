@@ -4,8 +4,6 @@
 
 ![](https://imgur.com/lIi4YrZ.png)
 
-
-
 ## Requirements
 
 Make sure you have [Docker](https://docs.docker.com/install/), [docker-compose](https://docs.docker.com/compose/install/), and [prisma](https://www.prisma.io/docs/prisma-cli-and-configuration/using-the-prisma-cli-alx4/) installed.
@@ -16,7 +14,7 @@ Simply run `npm i` and `docker-compose up -d` to start the Prisma and GraphQL Yo
 
 To generate the Prisma databse run `prisma deploy`. You can also use `prisma seed` to seed it.
 
-Run `npm start` to start the server.
+Run `npm dev` to start the server with live-reloading and development environments.
 
 The main point-of-entry is the Yoga GraphQL server which will be running on `http://localhost:4000`.
 
