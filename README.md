@@ -20,6 +20,23 @@ The main point-of-entry is the Yoga GraphQL server which will be running on `htt
 
 The Prisma server is also exposed on `http://localhost:4466`
 
+## Seeding
+
+```
+npm i -g prisma
+```
+
+The seed script is broken. In order to seed it from the production server you need the production keys on a file `.env.production` for example. Then using the prisma tool run:
+
+`prisma export -e .env.production`
+
+A file named somthing like `export-2020-02-17T17:59:53.436Z.zip` will be created, it contains all the remote data from the production server.
+
+Now the `import` command to import the database to your development prisma server:
+```
+prisma import -d export-2020-02-17T17:59:53.436Z.zip
+```
+
 ## Deploy
 
 ### Dokku
