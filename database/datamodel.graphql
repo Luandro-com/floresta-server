@@ -6,7 +6,7 @@ type Post {
   isPublished: Boolean! @default(value: false)
   title: String!
   body: String!
-  author: User!
+  author: User
   news: News @relation(link: INLINE)
 }
 
