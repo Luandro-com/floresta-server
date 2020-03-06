@@ -38,6 +38,11 @@ var whitelist = [
 ]
 var corsOptions = {
   origin: function (origin, callback) {
+    console.log("whitelist");
+    console.log(whitelist);
+    console.log("origin");
+    console.log(origin);
+    console.log(whitelist.indexOf(origin) !== -1);
     if (process.env.NODE_ENV === 'production') {
       if (whitelist.indexOf(origin) !== -1) {
         callback(null, true)
