@@ -49,4 +49,5 @@ input NewsInput {
   title: String
   media: String
   tags: [String]
+  order: Int
 }

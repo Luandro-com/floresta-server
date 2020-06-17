@@ -160,6 +160,35 @@ const admin = {
     )
   },
   async saveNews (parent, { input }, ctx, info) {
+    let newOrder = 0
+     // if input.order - trocar ordem do item existente por outro
+     if (input.order && input.id) {
+      const thisOrder = await ctx.db.query.news({ where: {
+        id: input.id
+      }}, info)
+      const existingOrder = await ctx.db.query.newses({
+        where: {
+          order: input.order
+        }
+      }, )
+      await ctx.db.mutation.updateNews({
+        where: {
+          id: existingOrder[0].id
+        },
+        data: {
+          order: thisOrder.order
+        }
+    }, info)
+      newOrder = input.order
+    } else {
+      // buscar pelo post com ultima ordem
+      const lastPost = await ctx.db.query.newses({
+        orderBy: "order_ASC",
+        last: 1
+      }, info)
+      // adicionar ordem +1
+      newOrder = lastPost[0].order + 1
+    }
     let cleanInput = {}
     Object.keys(input).map(i => {
       if (i !== 'id' && i !== 'post') {
@@ -213,7 +242,7 @@ const admin = {
         {
           update: { ...cleanInput, ...postUpdate, ...tagsUpdateConnections },
           where: { id: input.id || '' },
-          create: { ...cleanInput, ...postCreate, ...tagsCreateConnections }
+          create: { ...cleanInput, ...postCreate, ...tagsCreateConnections, order: newOrder }
         },
         info
       )
@@ -222,7 +251,7 @@ const admin = {
         {
           update: { ...cleanInput, ...tagsUpdateConnections },
           where: { id: input.id || '' },
-          create: { ...input, ...tagsCreateConnections }
+          create: { ...input, ...tagsCreateConnections, order: newOrder }
         },
         info
       )

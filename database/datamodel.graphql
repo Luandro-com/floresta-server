@@ -97,6 +97,7 @@ type Project {
   media: String
   intro: String
   description: String
+  order: Int
 }
 
 
@@ -135,6 +136,7 @@ type News {
   post: Post
   title: String
   media: String
+  order: Int
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

@@ -144,7 +144,7 @@ const Query = {
     const pagination = page
       ? { skip: page > 1 ? page * 3 - 3 : 0, first: 3 }
       : {}
-    const input = Object.assign(pagination, { orderBy: "createdAt_DESC" })
+    const input = Object.assign(pagination, { orderBy: "order_ASC" })
     return ctx.db.query.newses(input, info)
   }
 }

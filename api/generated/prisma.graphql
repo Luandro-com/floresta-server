@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Thu Feb 20 2020 11:55:22 GMT-0300 (Brasilia Standard Time)
+# timestamp: Wed Jun 17 2020 18:11:48 GMT-0300 (GMT-03:00)
 
 type AggregateCategory {
   count: Int!
@@ -2895,6 +2895,7 @@ type News implements Node {
   post: Post
   title: String
   media: String
+  order: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2916,6 +2917,7 @@ input NewsCreateInput {
   link: String
   title: String
   media: String
+  order: Int
   tags: ProjectTagCreateManyInput
   post: PostCreateOneWithoutNewsInput
 }
@@ -2932,6 +2934,7 @@ input NewsCreateWithoutPostInput {
   link: String
   title: String
   media: String
+  order: Int
   tags: ProjectTagCreateManyInput
 }
 
@@ -3165,6 +3168,8 @@ enum NewsOrderByInput {
   title_DESC
   media_ASC
   media_DESC
+  order_ASC
+  order_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -3178,6 +3183,7 @@ type NewsPreviousValues {
   link: String
   title: String
   media: String
+  order: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -3225,6 +3231,7 @@ input NewsUpdateInput {
   link: String
   title: String
   media: String
+  order: Int
   tags: ProjectTagUpdateManyInput
   post: PostUpdateOneWithoutNewsInput
 }
@@ -3235,6 +3242,7 @@ input NewsUpdateManyMutationInput {
   link: String
   title: String
   media: String
+  order: Int
 }
 
 input NewsUpdateOneWithoutPostInput {
@@ -3252,6 +3260,7 @@ input NewsUpdateWithoutPostDataInput {
   link: String
   title: String
   media: String
+  order: Int
   tags: ProjectTagUpdateManyInput
 }
 
@@ -3509,6 +3518,28 @@ input NewsWhereInput {
 
   """All values not ending with the given string."""
   media_not_ends_with: String
+  order: Int
+
+  """All values that are not equal to given value."""
+  order_not: Int
+
+  """All values that are contained in given list."""
+  order_in: [Int!]
+
+  """All values that are not contained in given list."""
+  order_not_in: [Int!]
+
+  """All values less than the given value."""
+  order_lt: Int
+
+  """All values less than or equal the given value."""
+  order_lte: Int
+
+  """All values greater than the given value."""
+  order_gt: Int
+
+  """All values greater than or equal the given value."""
+  order_gte: Int
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -4259,6 +4290,7 @@ type Project implements Node {
   media: String
   intro: String
   description: String
+  order: Int
 }
 
 enum ProjectCategory {
@@ -4285,6 +4317,7 @@ input ProjectCreateInput {
   media: String
   intro: String
   description: String
+  order: Int
   photos: ProjectCreatephotosInput
   categories: CategoryCreateManyWithoutProjectsInput
   tags: ProjectTagCreateManyWithoutProjectsInput
@@ -4311,6 +4344,7 @@ input ProjectCreateWithoutCategoriesInput {
   media: String
   intro: String
   description: String
+  order: Int
   photos: ProjectCreatephotosInput
   tags: ProjectTagCreateManyWithoutProjectsInput
 }
@@ -4322,6 +4356,7 @@ input ProjectCreateWithoutTagsInput {
   media: String
   intro: String
   description: String
+  order: Int
   photos: ProjectCreatephotosInput
   categories: CategoryCreateManyWithoutProjectsInput
 }
@@ -4352,6 +4387,8 @@ enum ProjectOrderByInput {
   intro_DESC
   description_ASC
   description_DESC
+  order_ASC
+  order_DESC
 }
 
 type ProjectPreviousValues {
@@ -4364,6 +4401,7 @@ type ProjectPreviousValues {
   media: String
   intro: String
   description: String
+  order: Int
 }
 
 input ProjectScalarWhereInput {
@@ -4659,6 +4697,28 @@ input ProjectScalarWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  order: Int
+
+  """All values that are not equal to given value."""
+  order_not: Int
+
+  """All values that are contained in given list."""
+  order_in: [Int!]
+
+  """All values that are not contained in given list."""
+  order_not_in: [Int!]
+
+  """All values less than the given value."""
+  order_lt: Int
+
+  """All values less than or equal the given value."""
+  order_lte: Int
+
+  """All values greater than the given value."""
+  order_gt: Int
+
+  """All values greater than or equal the given value."""
+  order_gte: Int
 }
 
 type ProjectSubscriptionPayload {
@@ -5539,6 +5599,7 @@ input ProjectUpdateInput {
   media: String
   intro: String
   description: String
+  order: Int
   photos: ProjectUpdatephotosInput
   categories: CategoryUpdateManyWithoutProjectsInput
   tags: ProjectTagUpdateManyWithoutProjectsInput
@@ -5550,6 +5611,7 @@ input ProjectUpdateManyDataInput {
   media: String
   intro: String
   description: String
+  order: Int
   photos: ProjectUpdatephotosInput
 }
 
@@ -5559,6 +5621,7 @@ input ProjectUpdateManyMutationInput {
   media: String
   intro: String
   description: String
+  order: Int
   photos: ProjectUpdatephotosInput
 }
 
@@ -5601,6 +5664,7 @@ input ProjectUpdateWithoutCategoriesDataInput {
   media: String
   intro: String
   description: String
+  order: Int
   photos: ProjectUpdatephotosInput
   tags: ProjectTagUpdateManyWithoutProjectsInput
 }
@@ -5611,6 +5675,7 @@ input ProjectUpdateWithoutTagsDataInput {
   media: String
   intro: String
   description: String
+  order: Int
   photos: ProjectUpdatephotosInput
   categories: CategoryUpdateManyWithoutProjectsInput
 }
@@ -5930,6 +5995,28 @@ input ProjectWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  order: Int
+
+  """All values that are not equal to given value."""
+  order_not: Int
+
+  """All values that are contained in given list."""
+  order_in: [Int!]
+
+  """All values that are not contained in given list."""
+  order_not_in: [Int!]
+
+  """All values less than the given value."""
+  order_lt: Int
+
+  """All values less than or equal the given value."""
+  order_lte: Int
+
+  """All values greater than the given value."""
+  order_gt: Int
+
+  """All values greater than or equal the given value."""
+  order_gte: Int
   categories_every: CategoryWhereInput
   categories_some: CategoryWhereInput
   categories_none: CategoryWhereInput
